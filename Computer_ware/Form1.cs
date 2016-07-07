@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Computer_ware.Controlador;
 
 namespace Computer_ware
 {
@@ -17,9 +18,29 @@ namespace Computer_ware
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        ControladorGen c = new ControladorGen();
+
+        private void btEntrar_Click(object sender, EventArgs e)
         {
-            
+            if (c.login(txtPass.Text))
+            {
+                Index i = new Index();
+                this.Hide();
+                i.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Contraseña incorrecta!");
+            }
+        }
+
+        private void txtPass_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btEntrar_Click(sender, e);
+            }
         }
     }
 }

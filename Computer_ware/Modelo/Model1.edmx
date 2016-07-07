@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WarehouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="contraseña" />
+          </Key>
+          <Property Name="contraseña" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="id_articulo" />
+          </Key>
+          <Property Name="id_articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="70" />
+          <Property Name="modelo" Type="varchar" MaxLength="70" />
+          <Property Name="serie" Type="varchar" MaxLength="200" />
+          <Property Name="observacion" Type="varchar" MaxLength="300" />
+          <Property Name="fecha_recepcion" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="Linea" Type="varchar" MaxLength="50" />
+          <Property Name="id_tecnico" Type="int" Nullable="false" />
+          <Property Name="id_atencion" Type="int" Nullable="false" />
+          <Property Name="id_os" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="atencion">
+          <Key>
+            <PropertyRef Name="id_atencion" />
+          </Key>
+          <Property Name="id_atencion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Rut" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="70" />
+          <Property Name="Comuna" Type="varchar" MaxLength="50" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="envio">
+          <Key>
+            <PropertyRef Name="id_envio" />
+          </Key>
+          <Property Name="id_envio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_articulo" Type="int" Nullable="false" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="fecha_envio" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Orden_servicio">
+          <Key>
+            <PropertyRef Name="id_os" />
+          </Key>
+          <Property Name="id_os" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+          <Property Name="id_tecnico" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tecnico">
+          <Key>
+            <PropertyRef Name="id_tecnico" />
+          </Key>
+          <Property Name="id_tecnico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Articulo_atencion">
+          <End Role="atencion" Type="Self.atencion" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atencion">
+              <PropertyRef Name="id_atencion" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="id_atencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulo_Orden_servicio">
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden_servicio">
+              <PropertyRef Name="id_os" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="id_os" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_envio_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="envio" Type="Self.envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="envio">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_servicio_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Orden_servicio">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_servicio_tecnico">
+          <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tecnico">
+              <PropertyRef Name="id_tecnico" />
+            </Principal>
+            <Dependent Role="Orden_servicio">
+              <PropertyRef Name="id_tecnico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarehouseModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="atencion" EntityType="Self.atencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="envio" EntityType="Self.envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden_servicio" EntityType="Self.Orden_servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articulo_atencion" Association="Self.FK_Articulo_atencion">
+            <End Role="atencion" EntitySet="atencion" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulo_Orden_servicio" Association="Self.FK_Articulo_Orden_servicio">
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_envio_Articulo" Association="Self.FK_envio_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="envio" EntitySet="envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_servicio_Cliente" Association="Self.FK_Orden_servicio_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_servicio_tecnico" Association="Self.FK_Orden_servicio_tecnico">
+            <End Role="tecnico" EntitySet="tecnico" />
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="contraseña" />
+          </Key>
+          <Property Name="contraseña" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="id_articulo" />
+          </Key>
+          <Property Name="id_articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="serie" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_recepcion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Linea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+          <Property Name="id_atencion" Type="Int32" Nullable="false" />
+          <Property Name="id_os" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="atencion" Relationship="Self.FK_Articulo_atencion" FromRole="Articulo" ToRole="atencion" />
+          <NavigationProperty Name="Orden_servicio" Relationship="Self.FK_Articulo_Orden_servicio" FromRole="Articulo" ToRole="Orden_servicio" />
+          <NavigationProperty Name="envio" Relationship="Self.FK_envio_Articulo" FromRole="Articulo" ToRole="envio" />
+        </EntityType>
+        <EntityType Name="atencion">
+          <Key>
+            <PropertyRef Name="id_atencion" />
+          </Key>
+          <Property Name="id_atencion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_atencion" FromRole="atencion" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rut" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orden_servicio" Relationship="Self.FK_Orden_servicio_Cliente" FromRole="Cliente" ToRole="Orden_servicio" />
+        </EntityType>
+        <EntityType Name="envio">
+          <Key>
+            <PropertyRef Name="id_envio" />
+          </Key>
+          <Property Name="id_envio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_articulo" Type="Int32" Nullable="false" />
+          <Property Name="ubicacion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_envio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_envio_Articulo" FromRole="envio" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Orden_servicio">
+          <Key>
+            <PropertyRef Name="id_os" />
+          </Key>
+          <Property Name="id_os" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_Orden_servicio" FromRole="Orden_servicio" ToRole="Articulo" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Orden_servicio_Cliente" FromRole="Orden_servicio" ToRole="Cliente" />
+          <NavigationProperty Name="tecnico" Relationship="Self.FK_Orden_servicio_tecnico" FromRole="Orden_servicio" ToRole="tecnico" />
+        </EntityType>
+        <EntityType Name="tecnico">
+          <Key>
+            <PropertyRef Name="id_tecnico" />
+          </Key>
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orden_servicio" Relationship="Self.FK_Orden_servicio_tecnico" FromRole="tecnico" ToRole="Orden_servicio" />
+        </EntityType>
+        <Association Name="FK_Articulo_atencion">
+          <End Role="atencion" Type="Self.atencion" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atencion">
+              <PropertyRef Name="id_atencion" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="id_atencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulo_Orden_servicio">
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden_servicio">
+              <PropertyRef Name="id_os" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="id_os" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_envio_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="envio" Type="Self.envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="envio">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_servicio_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Orden_servicio">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_servicio_tecnico">
+          <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
+          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tecnico">
+              <PropertyRef Name="id_tecnico" />
+            </Principal>
+            <Dependent Role="Orden_servicio">
+              <PropertyRef Name="id_tecnico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarehouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="atencion" EntityType="Self.atencion" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="envio" EntityType="Self.envio" />
+          <EntitySet Name="Orden_servicio" EntityType="Self.Orden_servicio" />
+          <EntitySet Name="tecnico" EntityType="Self.tecnico" />
+          <AssociationSet Name="FK_Articulo_atencion" Association="Self.FK_Articulo_atencion">
+            <End Role="atencion" EntitySet="atencion" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulo_Orden_servicio" Association="Self.FK_Articulo_Orden_servicio">
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_envio_Articulo" Association="Self.FK_envio_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="envio" EntitySet="envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_servicio_Cliente" Association="Self.FK_Orden_servicio_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_servicio_tecnico" Association="Self.FK_Orden_servicio_tecnico">
+            <End Role="tecnico" EntitySet="tecnico" />
+            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WarehouseModelStoreContainer" CdmEntityContainer="WarehouseEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="WarehouseModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="WarehouseModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+                <ScalarProperty Name="id_atencion" ColumnName="id_atencion" />
+                <ScalarProperty Name="id_os" ColumnName="id_os" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="atencion">
+            <EntityTypeMapping TypeName="WarehouseModel.atencion">
+              <MappingFragment StoreEntitySet="atencion">
+                <ScalarProperty Name="id_atencion" ColumnName="id_atencion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="WarehouseModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="envio">
+            <EntityTypeMapping TypeName="WarehouseModel.envio">
+              <MappingFragment StoreEntitySet="envio">
+                <ScalarProperty Name="id_envio" ColumnName="id_envio" />
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="fecha_envio" ColumnName="fecha_envio" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden_servicio">
+            <EntityTypeMapping TypeName="WarehouseModel.Orden_servicio">
+              <MappingFragment StoreEntitySet="Orden_servicio">
+                <ScalarProperty Name="id_os" ColumnName="id_os" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tecnico">
+            <EntityTypeMapping TypeName="WarehouseModel.tecnico">
+              <MappingFragment StoreEntitySet="tecnico">
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
