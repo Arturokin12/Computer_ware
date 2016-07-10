@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tecnicos));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btGuardarTec = new System.Windows.Forms.Button();
-            this.txtNombreTec = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nomre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btGuardarTec = new System.Windows.Forms.Button();
+            this.txtNombreTec = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +56,35 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(440, 150);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id_tecnico";
+            this.id.HeaderText = "#";
+            this.id.Name = "id";
+            // 
+            // Nomre
+            // 
+            this.Nomre.DataPropertyName = "Nombre";
+            this.Nomre.HeaderText = "Nombre";
+            this.Nomre.Name = "Nomre";
+            this.Nomre.Width = 180;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.Estado.Name = "Estado";
+            // 
+            // orden
+            // 
+            this.orden.DataPropertyName = "orden_servicio";
+            this.orden.HeaderText = "orden";
+            this.orden.Name = "orden";
+            this.orden.Visible = false;
             // 
             // groupBox1
             // 
@@ -96,44 +126,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "id_tecnico";
-            this.id.HeaderText = "#";
-            this.id.Name = "id";
-            // 
-            // Nomre
-            // 
-            this.Nomre.DataPropertyName = "Nombre";
-            this.Nomre.HeaderText = "Nombre";
-            this.Nomre.Name = "Nomre";
-            this.Nomre.Width = 180;
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "estado";
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.Estado.Name = "Estado";
-            // 
-            // orden
-            // 
-            this.orden.DataPropertyName = "orden_servicio";
-            this.orden.HeaderText = "orden";
-            this.orden.Name = "orden";
-            this.orden.Visible = false;
-            // 
             // Tecnicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Computer_ware.Properties.Resources.degradados_azules_1920x1200_127;
+            this.BackgroundImage = global::Computer_ware.Properties.Resources.smooth_ice;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(464, 403);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(480, 442);
             this.MinimizeBox = false;

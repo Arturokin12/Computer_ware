@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Artículo));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
+            this.btEditar = new System.Windows.Forms.Button();
             this.chkClose = new System.Windows.Forms.CheckBox();
             this.cbEstado = new System.Windows.Forms.ComboBox();
             this.lbIDArt = new System.Windows.Forms.Label();
@@ -57,6 +60,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.dtFecha);
+            this.groupBox1.Controls.Add(this.btEditar);
             this.groupBox1.Controls.Add(this.chkClose);
             this.groupBox1.Controls.Add(this.cbEstado);
             this.groupBox1.Controls.Add(this.lbIDArt);
@@ -86,6 +91,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Artículo";
+            // 
+            // dtFecha
+            // 
+            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFecha.Location = new System.Drawing.Point(284, 36);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(121, 22);
+            this.dtFecha.TabIndex = 33;
+            this.dtFecha.Visible = false;
+            // 
+            // btEditar
+            // 
+            this.btEditar.Location = new System.Drawing.Point(463, 166);
+            this.btEditar.Name = "btEditar";
+            this.btEditar.Size = new System.Drawing.Size(147, 26);
+            this.btEditar.TabIndex = 32;
+            this.btEditar.Text = "Editar";
+            this.btEditar.UseVisualStyleBackColor = true;
+            this.btEditar.Click += new System.EventHandler(this.btEditar_Click);
             // 
             // chkClose
             // 
@@ -147,6 +171,7 @@
             this.txtOS.Name = "txtOS";
             this.txtOS.Size = new System.Drawing.Size(121, 22);
             this.txtOS.TabIndex = 25;
+            this.txtOS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOS_KeyPress);
             // 
             // label9
             // 
@@ -285,10 +310,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Computer_ware.Properties.Resources.degradados_azules_1920x1200_127;
+            this.BackgroundImage = global::Computer_ware.Properties.Resources.smooth_ice;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(917, 248);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(933, 287);
             this.MinimizeBox = false;
@@ -320,7 +346,6 @@
         private System.Windows.Forms.Label Obs;
         private System.Windows.Forms.ComboBox cbTecnico;
         public System.Windows.Forms.Button btGuardar;
-        private System.Windows.Forms.TextBox txtOS;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cbAtencion;
         private System.Windows.Forms.Label label8;
@@ -328,5 +353,8 @@
         public System.Windows.Forms.Label lbIdShow;
         private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.CheckBox chkClose;
+        public System.Windows.Forms.Button btEditar;
+        private System.Windows.Forms.DateTimePicker dtFecha;
+        public System.Windows.Forms.TextBox txtOS;
     }
 }

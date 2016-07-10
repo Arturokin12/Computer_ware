@@ -42,7 +42,7 @@ namespace Computer_ware
         {
             //cbCliente
             BindingList<Cliente> clientes = new BindingList<Cliente>(con.getClientes());
-            clientes.Insert(0, new Cliente { id_cliente = 0, Nombre = "Seleccione"});
+            clientes.Insert(0, new Cliente { id_cliente = 0, Nombre = "Seleccione" });
             cbCliente.DataSource = clientes;
             cbCliente.ValueMember = "id_cliente";
             cbCliente.DisplayMember = "Nombre";
@@ -53,27 +53,53 @@ namespace Computer_ware
             cbTecnico.DataSource = tecnicos;
             cbTecnico.ValueMember = "id_tecnico";
             cbTecnico.DisplayMember = "nombre";
-            
-            try
-            {
-                var consulta = from o in ent.Orden_servicio
-                               join c in ent.Cliente on o.id_cliente equals c.id_cliente
-                               join t in ent.tecnico on o.id_tecnico equals t.id_tecnico
-                               select new Orden_Serv
-                               {
-                                   id_os = o.id_os,
-                                   cliente = c.Nombre,
-                                   fecha_inicio = o.fecha_inicio,
-                                   tecnico = t.Nombre
-                               };
-                BindingList<Orden_Serv> lista = new BindingList<Orden_Serv>(consulta.ToList<Orden_Serv>());
-                List<Orden_Serv> lista2 = new List<Orden_Serv>();
-                tablaOS.DataSource = lista;
-            }
-            catch (Exception)
-            {
 
+            if (txtBuscar.Text == "")
+            {
+                try
+                {
+                    var consulta = from o in ent.Orden_servicio
+                                   join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                                   join t in ent.tecnico on o.id_tecnico equals t.id_tecnico
+                                   select new Orden_Serv
+                                   {
+                                       id_os = o.id_os,
+                                       cliente = c.Nombre,
+                                       fecha_inicio = o.fecha_inicio,
+                                       tecnico = t.Nombre
+                                   };
+                    BindingList<Orden_Serv> lista = new BindingList<Orden_Serv>(consulta.ToList<Orden_Serv>());
+                    List<Orden_Serv> lista2 = new List<Orden_Serv>();
+                    tablaOS.DataSource = lista;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error de base de datos." + ex.InnerException, "Error Crítico");
+                }
             }
+            else
+            {
+                try
+                {
+                    var consulta = from o in ent.Orden_servicio
+                                   join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                                   join t in ent.tecnico on o.id_tecnico equals t.id_tecnico
+                                   where c.Nombre.Contains(txtBuscar.Text) || t.Nombre.Contains(txtBuscar.Text)
+                                   select new
+                                   {
+                                       o.id_os,
+                                       cliente = c.Nombre,
+                                       o.fecha_inicio,
+                                       tecnico = t.Nombre
+                                   };
+                    tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar O.S" + ex.InnerException, "Error Crítico");
+                }
+            }
+
         }
 
         private void btGuardarOS_Click(object sender, EventArgs e)
@@ -105,7 +131,7 @@ namespace Computer_ware
                                    select new
                                    {
                                        or.id_os,
-                                       c.Nombre,
+                                       cliente = c.Nombre,
                                        or.fecha_inicio,
                                        tecnico = t.Nombre
                                    };
@@ -113,8 +139,46 @@ namespace Computer_ware
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error inesperado al guardar, puede que la os ya exista. \n \n"+ex.InnerException.ToString());
+                    MessageBox.Show("Error inesperado al guardar, puede que la os ya exista. \n \n" + ex.InnerException.ToString());
                 }
+            }
+        }
+
+        private void txtOS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 48 && e.KeyChar <= 57) || e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var consulta = from o in ent.Orden_servicio
+                               join c in ent.Cliente
+  on o.id_cliente equals c.id_cliente
+                               join t in ent.tecnico
+on o.id_tecnico equals t.id_tecnico
+                               where
+c.Nombre.Contains(txtBuscar.Text) || t.Nombre.Contains(txtBuscar.Text)
+                               select new
+                               {
+                                   o.id_os,
+                                   cliente = c.Nombre,
+                                   o.fecha_inicio,
+                                   tecnico = t.Nombre
+                               };
+                tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar O.S" + ex.InnerException, "Error Crítico");
             }
         }
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClienteIndex));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btGuardar = new System.Windows.Forms.Button();
             this.txtDireccion = new System.Windows.Forms.TextBox();
@@ -48,7 +49,10 @@
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comuna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtBuscarNombre = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
@@ -169,11 +173,13 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.txtBuscarNombre);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tablaClientes);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(13, 257);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(847, 229);
+            this.groupBox2.Size = new System.Drawing.Size(847, 255);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clientes";
@@ -190,41 +196,49 @@
             this.Direccion,
             this.Comuna,
             this.Ciudad,
-            this.Estado});
-            this.tablaClientes.Location = new System.Drawing.Point(7, 47);
+            this.Estado,
+            this.orden});
+            this.tablaClientes.Location = new System.Drawing.Point(6, 55);
             this.tablaClientes.Name = "tablaClientes";
-            this.tablaClientes.Size = new System.Drawing.Size(816, 176);
+            this.tablaClientes.Size = new System.Drawing.Size(835, 194);
             this.tablaClientes.TabIndex = 0;
+            this.tablaClientes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellValueChanged);
             // 
             // ID_cliente
             // 
             this.ID_cliente.DataPropertyName = "id_cliente";
             this.ID_cliente.HeaderText = "#";
             this.ID_cliente.Name = "ID_cliente";
+            this.ID_cliente.ReadOnly = true;
+            this.ID_cliente.Width = 40;
             // 
             // Nombre
             // 
             this.Nombre.DataPropertyName = "Nombre";
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 150;
             // 
             // Rut
             // 
             this.Rut.DataPropertyName = "Rut";
             this.Rut.HeaderText = "Rut/Serie";
             this.Rut.Name = "Rut";
+            this.Rut.Width = 120;
             // 
             // Direccion
             // 
             this.Direccion.DataPropertyName = "Direccion";
             this.Direccion.HeaderText = "Dirección";
             this.Direccion.Name = "Direccion";
+            this.Direccion.Width = 140;
             // 
             // Comuna
             // 
             this.Comuna.DataPropertyName = "Comuna";
             this.Comuna.HeaderText = "Comuna";
             this.Comuna.Name = "Comuna";
+            this.Comuna.Width = 120;
             // 
             // Ciudad
             // 
@@ -236,17 +250,47 @@
             // 
             this.Estado.DataPropertyName = "Estado";
             this.Estado.HeaderText = "Estado";
+            this.Estado.Items.AddRange(new object[] {
+            "En Contrato",
+            "Sin Contrato"});
             this.Estado.Name = "Estado";
+            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // orden
+            // 
+            this.orden.DataPropertyName = "orden_servicio";
+            this.orden.HeaderText = "Orden_servicio";
+            this.orden.Name = "orden";
+            this.orden.Visible = false;
+            // 
+            // txtBuscarNombre
+            // 
+            this.txtBuscarNombre.Location = new System.Drawing.Point(84, 27);
+            this.txtBuscarNombre.Name = "txtBuscarNombre";
+            this.txtBuscarNombre.Size = new System.Drawing.Size(153, 22);
+            this.txtBuscarNombre.TabIndex = 11;
+            this.txtBuscarNombre.TextChanged += new System.EventHandler(this.txtBuscarNombre_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 16);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Buscar";
             // 
             // ClienteIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Computer_ware.Properties.Resources.degradados_azules_1920x1200_127;
+            this.BackgroundImage = global::Computer_ware.Properties.Resources.smooth_ice;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(870, 524);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(886, 563);
             this.MinimizeBox = false;
@@ -258,6 +302,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).EndInit();
             this.ResumeLayout(false);
 
@@ -285,6 +330,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comuna;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ciudad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orden;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox txtBuscarNombre;
     }
 }

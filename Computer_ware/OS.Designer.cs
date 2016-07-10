@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OS));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tablaOS = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +44,8 @@
             this.LBEL8 = new System.Windows.Forms.Label();
             this.txtOS = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaOS)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +53,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.txtBuscar);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tablaOS);
             this.groupBox1.Controls.Add(this.btGuardarOS);
             this.groupBox1.Controls.Add(this.cbTecnico);
@@ -175,6 +180,7 @@
             this.txtOS.Name = "txtOS";
             this.txtOS.Size = new System.Drawing.Size(125, 22);
             this.txtOS.TabIndex = 1;
+            this.txtOS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOS_KeyPress);
             // 
             // label1
             // 
@@ -185,15 +191,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Numero O.S";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 250);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 16);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Buscar:";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(82, 247);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(145, 22);
+            this.txtBuscar.TabIndex = 11;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
             // OS
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Computer_ware.Properties.Resources.degradados_azules_1920x1200_127;
+            this.BackgroundImage = global::Computer_ware.Properties.Resources.smooth_ice;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(588, 494);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(604, 533);
             this.MinimizeBox = false;
@@ -226,5 +250,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_tecnico;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox txtBuscar;
     }
 }

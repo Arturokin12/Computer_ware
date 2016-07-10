@@ -62,6 +62,12 @@
     <Compile Include="Artículo.Designer.cs">
       <DependentUpon>Artículo.cs</DependentUpon>
     </Compile>
+    <Compile Include="CambiarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarAtencion.Designer.cs">
+      <DependentUpon>CambiarAtencion.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClienteIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,18 @@
       <DependentUpon>ClienteIndex.cs</DependentUpon>
     </Compile>
     <Compile Include="Controlador\ControladorGen.cs" />
+    <Compile Include="EditarEstadoArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditarEstadoArt.Designer.cs">
+      <DependentUpon>EditarEstadoArt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnviarArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnviarArt.Designer.cs">
+      <DependentUpon>EnviarArt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,11 +150,32 @@
     <Compile Include="Tecnicos.Designer.cs">
       <DependentUpon>Tecnicos.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerCliente.Designer.cs">
+      <DependentUpon>VerCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerOS.Designer.cs">
+      <DependentUpon>VerOS.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Artículo.resx">
       <DependentUpon>Artículo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CambiarAtencion.resx">
+      <DependentUpon>CambiarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClienteIndex.resx">
       <DependentUpon>ClienteIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarEstadoArt.resx">
+      <DependentUpon>EditarEstadoArt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnviarArt.resx">
+      <DependentUpon>EnviarArt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -159,6 +198,12 @@
     </Compile>
     <EmbeddedResource Include="Tecnicos.resx">
       <DependentUpon>Tecnicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerCliente.resx">
+      <DependentUpon>VerCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerOS.resx">
+      <DependentUpon>VerOS.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Modelo\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -192,6 +237,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\www.png" />
+    <None Include="Resources\Warehouse1.png" />
     <None Include="Resources\coasin-telecom-banner.jpg" />
     <None Include="Resources\Imagen1.png" />
     <None Include="Resources\Coasin.png" />

@@ -47,6 +47,7 @@ namespace Computer_ware
             cbAtencion.DataSource = atenciones;
             cbAtencion.ValueMember = "id_atencion";
             cbAtencion.DisplayMember = "descripcion";
+            cbAtencion.SelectedIndex = 0;
 
             //cbtecnico
             BindingList<tecnico> tecnicos = new BindingList<tecnico>(con.getTecnicos());
@@ -54,6 +55,7 @@ namespace Computer_ware
             cbTecnico.DataSource = tecnicos;
             cbTecnico.ValueMember = "id_tecnico";
             cbTecnico.DisplayMember = "nombre";
+            cbTecnico.SelectedIndex = 0;
 
 
             //autoComplete
@@ -80,6 +82,23 @@ namespace Computer_ware
             txtObs.AutoCompleteMode = AutoCompleteMode.Suggest;
             txtObs.AutoCompleteCustomSource = Autocomplete("obs");
             txtObs.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            //datosEditar
+            if (lbIDArt.Text != "" && lbIDArt.Visible == true)
+            {
+                dtFecha.Visible = true;
+                Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIDArt.Text));
+                txtMarca.Text = a.marca;
+                txtModelo.Text = a.modelo;
+                txtSerie.Text = a.serie;
+                txtObs.Text = a.observacion;
+                dtFecha.Text = a.fecha_recepcion.ToShortDateString();
+                cbEstado.SelectedText = a.estado;
+                txtLinea.Text = a.Linea;
+                cbTecnico.SelectedValue = a.id_tecnico;
+                cbAtencion.SelectedValue = a.id_atencion;
+                txtOS.Text = a.id_os.ToString();
+            }
         }
 
         public AutoCompleteStringCollection Autocomplete(string valor)
@@ -144,29 +163,85 @@ namespace Computer_ware
 
             if (marca != "" && modelo != "" && serie != "" && cbTecnico.SelectedIndex != 0 && obs != "" && cbEstado.SelectedIndex != 0 && linea != "" && os != "" && cbAtencion.SelectedIndex != 0)
             {
-                string estado = cbEstado.SelectedItem.ToString();
-                Articulo art = new Articulo {
-                    marca = marca, modelo = modelo, serie = serie, id_tecnico = Convert.ToInt32(tecnico),
-                    observacion = obs, Linea = linea, id_atencion = Convert.ToInt32(atencion),
-                    id_os = Convert.ToInt32(os), fecha_recepcion = DateTime.Now
-                };
-                bool b = false;
-                try
+                if (ent.Orden_servicio.Find(Convert.ToInt32(os)) != null)
                 {
-                    ent.Articulo.Add(art);
-                    ent.SaveChanges();
-                    if (chkClose.Checked == true)
+                    string estado = cbEstado.SelectedItem.ToString();
+                    Articulo art = new Articulo
                     {
-                        this.Close();
+                        marca = marca,
+                        modelo = modelo,
+                        serie = serie,
+                        id_tecnico = Convert.ToInt32(tecnico),
+                        observacion = obs,
+                        Linea = linea,
+                        id_atencion = Convert.ToInt32(atencion),
+                        id_os = Convert.ToInt32(os),
+                        fecha_recepcion = DateTime.Now
+                    };
+                    bool b = false;
+                    try
+                    {
+                        ent.Articulo.Add(art);
+                        ent.SaveChanges();
+                        if (chkClose.Checked == true)
+                        {
+                            this.Close();
+                        }
                     }
-                }
-                catch (Exception ex)
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error crítico al guardar \n \n" + ex.InnerException.ToString(), "Error al guardar");
+                    }
+                }else
                 {
-                    MessageBox.Show("Error crítico al guardar \n \n"+ex.InnerException, "Error al guardar");
+                    MessageBox.Show("Error al guardar, la orden de servicio ingresada no existe.", "O.S No existe");
                 }
             }else
             {
                 MessageBox.Show("Ingrese todos los datos.");
+            }
+        }
+
+        private void btEditar_Click(object sender, EventArgs e)
+        {
+            if (lbIDArt.Text != "")
+            {
+                if (txtMarca.Text != "" && txtModelo.Text != "" && txtSerie.Text != "" && txtObs.Text != "" && txtLinea.Text != "" && cbAtencion.SelectedIndex != 0 && cbEstado.SelectedIndex != 0 && cbTecnico.SelectedIndex != 0)
+                {
+                    Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIDArt.Text));
+                    a.marca = txtMarca.Text;
+                    a.modelo = txtModelo.Text;
+                    a.serie = txtSerie.Text;
+                    a.observacion = txtObs.Text;
+                    a.estado = cbEstado.Text;
+                    a.Linea = txtLinea.Text;
+                    a.id_tecnico = Convert.ToInt32(cbTecnico.SelectedValue.ToString());
+                    a.id_atencion = Convert.ToInt32(cbAtencion.SelectedValue.ToString());
+                    if (ent.Orden_servicio.Find(Convert.ToInt32(txtOS.Text)) != null)
+                    {
+                        a.id_os = Convert.ToInt32(txtOS.Text);
+                        ent.SaveChanges();
+                        if (chkClose.Checked == true)
+                        {
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La Orden de servicio ingresada no existe!");
+                    }
+                }
+            }
+        }
+
+        private void txtOS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 48 && e.KeyChar <=57) || e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }else
+            {
+                e.Handled = true;
             }
         }
     }

@@ -74,7 +74,7 @@ namespace Computer_ware
                 tecnico = "";
             }
             Articulo art = new Articulo {
-                marca = txtMarca.Text, modelo = txtModelo.Text, estado = txtEstado.Text,
+                marca = txtMarca.Text, modelo = txtModelo.Text, estado = cbEstado.SelectedText,
                 serie = txtSerie.Text, Linea = txtLinea.Text, fecha_recepcion = Convert.ToDateTime(dtFechaR.Text)
             };
             tablaArticulos.DataSource = con.buscarArticulos(art, atencion, tecnico);
@@ -103,6 +103,7 @@ namespace Computer_ware
             //levantar ventana Agregar Artículo
             Artículo a = new Artículo();
             a.btGuardar.Visible = true;
+            a.btEditar.Visible = false;
             a.ShowDialog();
             tablaArticulos.DataSource = con.getArticulos();
         }
@@ -132,22 +133,123 @@ namespace Computer_ware
 
         private void editarArtículoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string id_art;
-            string marca;
-            string modelo;
-            string serie;
-            string obs;
-            string fecha;
-            string estado;
-            string linea;
-            string tecnico;
-            string atencion;
-            string os;
+            if (id_mouseClick != "")
+            {
+                string id_art = id_mouseClick;
+                Artículo ar = new Artículo();
+                ar.lbIDArt.Text = id_art;
+                ar.btGuardar.Visible = false;
+                ar.btEditar.Visible = true;
+                ar.lbIDArt.Visible = true;
+                ar.lbIdShow.Visible = true;
+                ar.ShowDialog();
+                tablaArticulos.DataSource = con.getArticulos();
+            }
+            
+            //string marca;
+            //string modelo;
+            //string serie;
+            //string obs;
+            //string fecha;
+            //string estado;
+            //string linea;
+            //string tecnico;
+            //string atencion;
+            //string os;
         }
 
         private void tablaArticulos_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void registrarEnvíoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnviarArt a = new EnviarArt();
+            a.lbIDArticulo.Text = id_mouseClick;
+            a.ShowDialog();
+            tablaArticulos.DataSource = con.getArticulos();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //for (int i = 0; i < tablaArticulos.Rows.Count; i++)
+            //{
+            //    try
+            //    {
+            //        ent.Articulo.Remove(ent.Articulo.Find(Convert.ToInt32(tablaArticulos.Rows[i].Cells[0].Value.ToString())));
+            //        ent.SaveChanges();
+            //    }
+            //    catch (Exception)
+            //    {
+                    
+            //    }
+            //}
+            //tablaArticulos.DataSource = con.getArticulos();
+        }
+
+        private void cambiarEstadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditarEstadoArt ed = new EditarEstadoArt();
+            ed.lbIdArt.Text = id_mouseClick;
+            ed.ShowDialog();
+            tablaArticulos.DataSource = con.getArticulos();
+        }
+
+        private void cambiarAtenciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CambiarAtencion c = new CambiarAtencion();
+            c.lbIdArt.Text = id_mouseClick;
+            c.ShowDialog();
+            tablaArticulos.DataSource = con.getArticulos();
+        }
+
+        private void verClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VerCliente v = new VerCliente();
+            var consulta = from a in ent.Articulo
+                           join o in ent.Orden_servicio on a.id_os equals o.id_os
+                           join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                           select c;
+            if (consulta.ToList().ElementAt(0) != null)
+            {
+                Cliente c = consulta.ToList().ElementAt(0);
+                v.lbidCliente.Text = c.id_cliente+"";
+                v.lbNombreCliente.Text = c.Nombre;
+                v.lbRut.Text = c.Rut;
+                v.lbDireccionCliente.Text = c.Direccion;
+                v.lbComunaCliente.Text = c.Comuna;
+                v.lbCiudad.Text = c.Ciudad;
+                v.lbEstadoCliente.Text = c.Ciudad;
+                v.ShowDialog();
+            }else
+            {
+                MessageBox.Show("Ningún Cliente asociado a éste Artículo.", "Sin Cliente.");
+            }
+        }
+
+        private void verOSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VerOS v = new VerOS();
+            v.lbidOS.Text = ent.Articulo.Find(Convert.ToInt32(id_mouseClick)).id_os.ToString();
+            v.ShowDialog();
+        }
+
+        private void eliminarArticuloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 48 && e.KeyChar <= 57) || e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

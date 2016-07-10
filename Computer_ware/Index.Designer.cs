@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Index));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,10 +53,11 @@
             this.Atencion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_os = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.cbAtencion = new System.Windows.Forms.ComboBox();
             this.btBuscar = new System.Windows.Forms.Button();
             this.txtLinea = new System.Windows.Forms.TextBox();
-            this.txtEstado = new System.Windows.Forms.TextBox();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtSerie = new System.Windows.Forms.TextBox();
@@ -135,28 +137,28 @@
             // artículoToolStripMenuItem
             // 
             this.artículoToolStripMenuItem.Name = "artículoToolStripMenuItem";
-            this.artículoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.artículoToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.artículoToolStripMenuItem.Text = "Artículo";
             this.artículoToolStripMenuItem.Click += new System.EventHandler(this.artículoToolStripMenuItem_Click);
             // 
             // clienteToolStripMenuItem
             // 
             this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.clienteToolStripMenuItem.Text = "Cliente";
             this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
             // 
             // técnicoToolStripMenuItem
             // 
             this.técnicoToolStripMenuItem.Name = "técnicoToolStripMenuItem";
-            this.técnicoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.técnicoToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.técnicoToolStripMenuItem.Text = "Técnico";
             this.técnicoToolStripMenuItem.Click += new System.EventHandler(this.técnicoToolStripMenuItem_Click);
             // 
             // oSToolStripMenuItem
             // 
             this.oSToolStripMenuItem.Name = "oSToolStripMenuItem";
-            this.oSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oSToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.oSToolStripMenuItem.Text = "O.S";
             this.oSToolStripMenuItem.Click += new System.EventHandler(this.oSToolStripMenuItem_Click);
             // 
@@ -266,10 +268,11 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.cbEstado);
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.cbAtencion);
             this.groupBox2.Controls.Add(this.btBuscar);
             this.groupBox2.Controls.Add(this.txtLinea);
-            this.groupBox2.Controls.Add(this.txtEstado);
             this.groupBox2.Controls.Add(this.txtModelo);
             this.groupBox2.Controls.Add(this.txtMarca);
             this.groupBox2.Controls.Add(this.txtSerie);
@@ -291,6 +294,31 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Búsqueda";
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Items.AddRange(new object[] {
+            "Seleccione",
+            "En laboratorio",
+            "Reparado",
+            "Enviado"});
+            this.cbEstado.Location = new System.Drawing.Point(578, 144);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(145, 21);
+            this.cbEstado.TabIndex = 31;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(796, 130);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 45);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "eliminar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cbAtencion
             // 
@@ -317,13 +345,6 @@
             this.txtLinea.Name = "txtLinea";
             this.txtLinea.Size = new System.Drawing.Size(145, 20);
             this.txtLinea.TabIndex = 19;
-            // 
-            // txtEstado
-            // 
-            this.txtEstado.Location = new System.Drawing.Point(578, 140);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.Size = new System.Drawing.Size(145, 20);
-            this.txtEstado.TabIndex = 18;
             // 
             // txtModelo
             // 
@@ -469,6 +490,7 @@
             this.txtOS.Size = new System.Drawing.Size(145, 20);
             this.txtOS.TabIndex = 0;
             this.txtOS.TextChanged += new System.EventHandler(this.txtOS_TextChanged);
+            this.txtOS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOS_KeyPress);
             // 
             // contextMenuStrip1
             // 
@@ -493,31 +515,36 @@
             // 
             this.registrarEnvíoToolStripMenuItem.Name = "registrarEnvíoToolStripMenuItem";
             this.registrarEnvíoToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.registrarEnvíoToolStripMenuItem.Text = "Registrar Envío";
+            this.registrarEnvíoToolStripMenuItem.Text = "Enviar Artículo";
+            this.registrarEnvíoToolStripMenuItem.Click += new System.EventHandler(this.registrarEnvíoToolStripMenuItem_Click);
             // 
             // cambiarEstadoToolStripMenuItem
             // 
             this.cambiarEstadoToolStripMenuItem.Name = "cambiarEstadoToolStripMenuItem";
             this.cambiarEstadoToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.cambiarEstadoToolStripMenuItem.Text = "Cambiar Estado";
+            this.cambiarEstadoToolStripMenuItem.Click += new System.EventHandler(this.cambiarEstadoToolStripMenuItem_Click);
             // 
             // cambiarAtenciónToolStripMenuItem
             // 
             this.cambiarAtenciónToolStripMenuItem.Name = "cambiarAtenciónToolStripMenuItem";
             this.cambiarAtenciónToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.cambiarAtenciónToolStripMenuItem.Text = "Cambiar Atención";
+            this.cambiarAtenciónToolStripMenuItem.Click += new System.EventHandler(this.cambiarAtenciónToolStripMenuItem_Click);
             // 
             // verClienteToolStripMenuItem
             // 
             this.verClienteToolStripMenuItem.Name = "verClienteToolStripMenuItem";
             this.verClienteToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.verClienteToolStripMenuItem.Text = "Ver Cliente";
+            this.verClienteToolStripMenuItem.Click += new System.EventHandler(this.verClienteToolStripMenuItem_Click);
             // 
             // verOSToolStripMenuItem
             // 
             this.verOSToolStripMenuItem.Name = "verOSToolStripMenuItem";
             this.verOSToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.verOSToolStripMenuItem.Text = "Ver O.S";
+            this.verOSToolStripMenuItem.Click += new System.EventHandler(this.verOSToolStripMenuItem_Click);
             // 
             // Index
             // 
@@ -530,6 +557,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Index";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -560,7 +588,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.TextBox txtLinea;
-        private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.TextBox txtSerie;
@@ -603,5 +630,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tecnico;
         private System.Windows.Forms.DataGridViewTextBoxColumn Atencion;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_os;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbEstado;
     }
 }
