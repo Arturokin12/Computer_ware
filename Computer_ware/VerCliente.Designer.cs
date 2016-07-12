@@ -92,7 +92,7 @@
             // lbRut
             // 
             this.lbRut.AutoSize = true;
-            this.lbRut.Location = new System.Drawing.Point(152, 292);
+            this.lbRut.Location = new System.Drawing.Point(508, 180);
             this.lbRut.Name = "lbRut";
             this.lbRut.Size = new System.Drawing.Size(0, 16);
             this.lbRut.TabIndex = 17;
@@ -100,7 +100,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(68, 292);
+            this.label9.Location = new System.Drawing.Point(435, 180);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 16);
             this.label9.TabIndex = 16;
@@ -117,7 +117,7 @@
             // lbCantidadOS
             // 
             this.lbCantidadOS.AutoSize = true;
-            this.lbCantidadOS.Location = new System.Drawing.Point(524, 180);
+            this.lbCantidadOS.Location = new System.Drawing.Point(508, 180);
             this.lbCantidadOS.Name = "lbCantidadOS";
             this.lbCantidadOS.Size = new System.Drawing.Size(0, 16);
             this.lbCantidadOS.TabIndex = 14;
@@ -173,20 +173,22 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(364, 235);
+            this.label8.Location = new System.Drawing.Point(418, 326);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(138, 16);
             this.label8.TabIndex = 7;
             this.label8.Text = "Artículos en actividad:";
+            this.label8.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(412, 178);
+            this.label7.Location = new System.Drawing.Point(466, 269);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 16);
             this.label7.TabIndex = 6;
             this.label7.Text = "Cantidad O.S:";
+            this.label7.Visible = false;
             // 
             // label6
             // 
@@ -268,7 +270,7 @@
             // editarClienteToolStripMenuItem
             // 
             this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
-            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.editarClienteToolStripMenuItem.Text = "Editar Cliente";
             this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
             // 
@@ -278,7 +280,7 @@
             this.verOrdenesDeServicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ordenesDeServicioToolStripMenuItem});
             this.verOrdenesDeServicioToolStripMenuItem.Name = "verOrdenesDeServicioToolStripMenuItem";
-            this.verOrdenesDeServicioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.verOrdenesDeServicioToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.verOrdenesDeServicioToolStripMenuItem.Text = "Ver";
             // 
             // ordenesDeServicioToolStripMenuItem
@@ -291,7 +293,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 

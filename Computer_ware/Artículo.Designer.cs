@@ -140,7 +140,7 @@
             this.cbEstado.Location = new System.Drawing.Point(383, 138);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(167, 24);
-            this.cbEstado.TabIndex = 30;
+            this.cbEstado.TabIndex = 10;
             // 
             // lbIDArt
             // 
@@ -166,7 +166,7 @@
             this.btGuardar.Location = new System.Drawing.Point(135, 346);
             this.btGuardar.Name = "btGuardar";
             this.btGuardar.Size = new System.Drawing.Size(182, 40);
-            this.btGuardar.TabIndex = 26;
+            this.btGuardar.TabIndex = 14;
             this.btGuardar.Text = "Guardar";
             this.btGuardar.UseVisualStyleBackColor = true;
             this.btGuardar.Click += new System.EventHandler(this.btGuardar_Click);
@@ -176,7 +176,7 @@
             this.txtOS.Location = new System.Drawing.Point(383, 196);
             this.txtOS.Name = "txtOS";
             this.txtOS.Size = new System.Drawing.Size(167, 22);
-            this.txtOS.TabIndex = 25;
+            this.txtOS.TabIndex = 11;
             this.txtOS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOS_KeyPress);
             // 
             // label9
@@ -193,7 +193,7 @@
             this.txtLinea.Location = new System.Drawing.Point(383, 254);
             this.txtLinea.Name = "txtLinea";
             this.txtLinea.Size = new System.Drawing.Size(167, 22);
-            this.txtLinea.TabIndex = 18;
+            this.txtLinea.TabIndex = 12;
             // 
             // label7
             // 
@@ -219,7 +219,7 @@
             this.txtObs.Multiline = true;
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(165, 68);
-            this.txtObs.TabIndex = 14;
+            this.txtObs.TabIndex = 7;
             // 
             // Obs
             // 
@@ -235,7 +235,7 @@
             this.txtSerie.Location = new System.Drawing.Point(78, 257);
             this.txtSerie.Name = "txtSerie";
             this.txtSerie.Size = new System.Drawing.Size(165, 22);
-            this.txtSerie.TabIndex = 5;
+            this.txtSerie.TabIndex = 8;
             // 
             // label3
             // 
@@ -251,14 +251,14 @@
             this.txtModelo.Location = new System.Drawing.Point(383, 90);
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(167, 22);
-            this.txtModelo.TabIndex = 3;
+            this.txtModelo.TabIndex = 9;
             // 
             // txtMarca
             // 
             this.txtMarca.Location = new System.Drawing.Point(78, 91);
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(165, 22);
-            this.txtMarca.TabIndex = 2;
+            this.txtMarca.TabIndex = 6;
             // 
             // label2
             // 
@@ -285,7 +285,7 @@
             this.cbAtencion.Location = new System.Drawing.Point(97, 168);
             this.cbAtencion.Name = "cbAtencion";
             this.cbAtencion.Size = new System.Drawing.Size(168, 21);
-            this.cbAtencion.TabIndex = 23;
+            this.cbAtencion.TabIndex = 2;
             // 
             // label8
             // 
@@ -303,7 +303,7 @@
             this.cbTecnico.Location = new System.Drawing.Point(97, 107);
             this.cbTecnico.Name = "cbTecnico";
             this.cbTecnico.Size = new System.Drawing.Size(168, 21);
-            this.cbTecnico.TabIndex = 12;
+            this.cbTecnico.TabIndex = 1;
             // 
             // label4
             // 
@@ -355,7 +355,7 @@
             this.cbEstadoOT.Location = new System.Drawing.Point(97, 230);
             this.cbEstadoOT.Name = "cbEstadoOT";
             this.cbEstadoOT.Size = new System.Drawing.Size(168, 21);
-            this.cbEstadoOT.TabIndex = 29;
+            this.cbEstadoOT.TabIndex = 3;
             // 
             // label11
             // 
@@ -381,7 +381,7 @@
             this.dtFechaTer.Location = new System.Drawing.Point(97, 354);
             this.dtFechaTer.Name = "dtFechaTer";
             this.dtFechaTer.Size = new System.Drawing.Size(168, 20);
-            this.dtFechaTer.TabIndex = 26;
+            this.dtFechaTer.TabIndex = 5;
             // 
             // label5
             // 
@@ -398,7 +398,7 @@
             this.dtFechaInicio.Location = new System.Drawing.Point(97, 291);
             this.dtFechaInicio.Name = "dtFechaInicio";
             this.dtFechaInicio.Size = new System.Drawing.Size(168, 20);
-            this.dtFechaInicio.TabIndex = 24;
+            this.dtFechaInicio.TabIndex = 4;
             // 
             // Artículo
             // 

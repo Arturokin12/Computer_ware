@@ -53,6 +53,7 @@
             this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
@@ -173,6 +174,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtBuscarNombre);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tablaClientes);
@@ -282,6 +284,15 @@
             this.orden.Name = "orden";
             this.orden.Visible = false;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(579, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(238, 16);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Doble Click o F2 en artículo para editar";
+            // 
             // ClienteIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -335,5 +346,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orden;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.TextBox txtBuscarNombre;
+        private System.Windows.Forms.Label label7;
     }
 }

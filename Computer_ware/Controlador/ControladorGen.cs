@@ -89,10 +89,9 @@ namespace Computer_ware.Controlador
                 var consulta = from a in ent.Articulo
                                join or in ent.Orden_trabajo on a.id_articulo equals or.id_articulo
                                join at in ent.atencion on or.id_atencion equals at.id_atencion
-                               join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                               join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                join o in ent.Orden_servicio on a.id_os equals o.id_os
                                join c in ent.Cliente on o.id_cliente equals c.id_cliente
-                               where or.Estado.Equals("Pendiente")
                                select new { a.id_articulo, a.marca, a.modelo, a.serie, a.observacion, a.fecha_recepcion, a.estado, a.Linea, t.Nombre, at.descripcion, a.id_os, cliente = c.Nombre, or.id_ot};
                 BindingList<object> list = new BindingList<object>(consulta.ToList<object>());
                 return list;
@@ -110,7 +109,7 @@ namespace Computer_ware.Controlador
                 var consulta = from a in ent.Articulo
                                join or in ent.Orden_trabajo on a.id_articulo equals or.id_articulo
                                join at in ent.atencion on or.id_atencion equals at.id_atencion
-                               join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                               join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                join o in ent.Orden_servicio on a.id_os equals o.id_os
                                join c in ent.Cliente on o.id_cliente equals c.id_cliente
                                where a.marca.Contains(art.marca) && a.modelo.Contains(art.modelo)
@@ -137,7 +136,7 @@ namespace Computer_ware.Controlador
                 var consulta = from a in ent.Articulo
                                join or in ent.Orden_trabajo on a.id_articulo equals or.id_articulo
                                join at in ent.atencion on or.id_atencion equals at.id_atencion
-                               join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                               join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                join o in ent.Orden_servicio on a.id_os equals o.id_os 
                                join c in ent.Cliente on o.id_cliente equals c.id_cliente
                                where a.id_os.ToString().Contains(os)
@@ -158,10 +157,31 @@ namespace Computer_ware.Controlador
                 var consulta = from a in ent.Articulo
                                join or in ent.Orden_trabajo on a.id_articulo equals or.id_articulo
                                join at in ent.atencion on or.id_atencion equals at.id_atencion
-                               join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                               join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                join o in ent.Orden_servicio on a.id_os equals o.id_os
                                join c in ent.Cliente on o.id_cliente equals c.id_cliente
                                where or.id_ot.ToString().Contains(ot)
+                               select new { a.id_articulo, a.marca, a.modelo, a.serie, a.observacion, a.fecha_recepcion, a.estado, a.Linea, t.Nombre, at.descripcion, a.id_os, cliente = c.Nombre, or.id_ot };
+                BindingList<object> list = new BindingList<object>(consulta.ToList<object>());
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public BindingList<object> buscarPorFechaArt(DateTime desde, DateTime hasta)
+        {
+            try
+            {
+                var consulta = from a in ent.Articulo
+                               join or in ent.Orden_trabajo on a.id_articulo equals or.id_articulo
+                               join at in ent.atencion on or.id_atencion equals at.id_atencion
+                               join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
+                               join o in ent.Orden_servicio on a.id_os equals o.id_os
+                               join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                               where (or.Fecha_inicio >= desde && or.Fecha_inicio <= hasta) || (a.fecha_recepcion >= desde && a.fecha_recepcion <= hasta)
                                select new { a.id_articulo, a.marca, a.modelo, a.serie, a.observacion, a.fecha_recepcion, a.estado, a.Linea, t.Nombre, at.descripcion, a.id_os, cliente = c.Nombre, or.id_ot };
                 BindingList<object> list = new BindingList<object>(consulta.ToList<object>());
                 return list;

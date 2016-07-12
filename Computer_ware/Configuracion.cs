@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Computer_ware.Controlador;
+using Computer_ware.Modelo;
 
 namespace Computer_ware
 {
@@ -34,9 +36,33 @@ namespace Computer_ware
             InitializeComponent();
         }
 
+        ControladorGen c = new ControladorGen();
+        WarehouseEntities ent = new WarehouseEntities();
+
         private void btCambiar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (c.login(txtPass.Text))
+            {
+                if (txtNew.Text == txtNew2.Text)
+                {
+                    try
+                    {
+                        ent.Database.ExecuteSqlCommand("update admin set contraseña = '"+txtNew2.Text+"' where contraseña = '"+txtPass.Text+"'");
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al cambiar Contraseña \n \n "+ex.InnerException.ToString().Substring(0,100), "Error Crítico!");
+                    }
+                }else
+                {
+                    MessageBox.Show("Contraseñas no coinciden","Error");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Contraseña incorrecta!");
+            }
         }
     }
 }

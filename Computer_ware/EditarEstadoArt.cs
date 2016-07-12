@@ -40,7 +40,7 @@ namespace Computer_ware
         {
             Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIdArt.Text));
             groupBox1.Text = "Cambiar estado a " + a.marca + " " + a.modelo + " - " + a.serie;
-            cbEstado.SelectedText = a.estado;
+            cbEstado.SelectedItem = a.estado;
         }
 
         private void btlisto_Click(object sender, EventArgs e)
@@ -48,9 +48,15 @@ namespace Computer_ware
             Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIdArt.Text));
             try
             {
-                a.estado = cbEstado.SelectedItem.ToString();
-                ent.SaveChanges();
-                this.Close();
+                if (cbEstado.SelectedIndex != 0)
+                {
+                    a.estado = cbEstado.SelectedItem.ToString();
+                    ent.SaveChanges();
+                    this.Close();
+                }else
+                {
+                    MessageBox.Show("Seleccione el estado.", "Dato no ingresado");
+                }
             }
             catch (Exception ex)
             {

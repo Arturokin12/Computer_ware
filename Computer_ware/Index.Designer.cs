@@ -89,7 +89,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btBuscarFechas = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtFechaHastaOT = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtBuscarOT = new System.Windows.Forms.TextBox();
@@ -113,7 +113,7 @@
             this.agregarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1354, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -624,7 +624,7 @@
             this.groupBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox5.BackgroundImage")));
             this.groupBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox5.Controls.Add(this.btBuscarFechas);
-            this.groupBox5.Controls.Add(this.dateTimePicker1);
+            this.groupBox5.Controls.Add(this.dtFechaHastaOT);
             this.groupBox5.Controls.Add(this.label11);
             this.groupBox5.Controls.Add(this.dtFechaOT);
             this.groupBox5.Controls.Add(this.label8);
@@ -643,23 +643,24 @@
             this.btBuscarFechas.TabIndex = 16;
             this.btBuscarFechas.Text = "Buscar";
             this.btBuscarFechas.UseVisualStyleBackColor = true;
+            this.btBuscarFechas.Click += new System.EventHandler(this.btBuscarFechas_Click);
             // 
-            // dateTimePicker1
+            // dtFechaHastaOT
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(138, 112);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(145, 20);
-            this.dateTimePicker1.TabIndex = 15;
+            this.dtFechaHastaOT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFechaHastaOT.Location = new System.Drawing.Point(138, 112);
+            this.dtFechaHastaOT.Name = "dtFechaHastaOT";
+            this.dtFechaHastaOT.Size = new System.Drawing.Size(145, 20);
+            this.dtFechaHastaOT.TabIndex = 15;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(50, 115);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 13);
+            this.label11.Size = new System.Drawing.Size(68, 13);
             this.label11.TabIndex = 14;
-            this.label11.Text = "Fecha Desde";
+            this.label11.Text = "Fecha Hasta";
             // 
             // groupBox6
             // 
@@ -710,7 +711,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Computer_ware.Properties.Resources.smooth_ice;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1354, 662);
+            this.ClientSize = new System.Drawing.Size(1362, 729);
             this.Controls.Add(this.btClean);
             this.Controls.Add(this.btMostrar);
             this.Controls.Add(this.groupBox6);
@@ -723,6 +724,9 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1378, 768);
+            this.MinimumSize = new System.Drawing.Size(1364, 726);
             this.Name = "Index";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Computer Warehouse";
@@ -794,7 +798,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btBuscarFechas;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtFechaHastaOT;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox txtBuscarOT;

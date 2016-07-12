@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbidOT = new System.Windows.Forms.Label();
+            this.lbShowOT = new System.Windows.Forms.Label();
+            this.btEditar = new System.Windows.Forms.Button();
             this.btGuardar = new System.Windows.Forms.Button();
             this.lbidArt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,14 +56,21 @@
             this.Fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_termino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_atencion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.terminarOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaOT)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.lbidOT);
+            this.groupBox2.Controls.Add(this.lbShowOT);
+            this.groupBox2.Controls.Add(this.btEditar);
             this.groupBox2.Controls.Add(this.btGuardar);
             this.groupBox2.Controls.Add(this.lbidArt);
             this.groupBox2.Controls.Add(this.label1);
@@ -81,6 +92,36 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "O.T";
+            // 
+            // lbidOT
+            // 
+            this.lbidOT.AutoSize = true;
+            this.lbidOT.Location = new System.Drawing.Point(149, 280);
+            this.lbidOT.Name = "lbidOT";
+            this.lbidOT.Size = new System.Drawing.Size(0, 16);
+            this.lbidOT.TabIndex = 36;
+            this.lbidOT.Visible = false;
+            // 
+            // lbShowOT
+            // 
+            this.lbShowOT.AutoSize = true;
+            this.lbShowOT.Location = new System.Drawing.Point(62, 280);
+            this.lbShowOT.Name = "lbShowOT";
+            this.lbShowOT.Size = new System.Drawing.Size(81, 16);
+            this.lbShowOT.TabIndex = 35;
+            this.lbShowOT.Text = "O.T a editar:";
+            this.lbShowOT.Visible = false;
+            // 
+            // btEditar
+            // 
+            this.btEditar.Location = new System.Drawing.Point(391, 280);
+            this.btEditar.Name = "btEditar";
+            this.btEditar.Size = new System.Drawing.Size(85, 33);
+            this.btEditar.TabIndex = 34;
+            this.btEditar.Text = "Editar";
+            this.btEditar.UseVisualStyleBackColor = true;
+            this.btEditar.Visible = false;
+            this.btEditar.Click += new System.EventHandler(this.btEditar_Click);
             // 
             // btGuardar
             // 
@@ -241,6 +282,7 @@
             this.tablaOT.ReadOnly = true;
             this.tablaOT.Size = new System.Drawing.Size(771, 166);
             this.tablaOT.TabIndex = 0;
+            this.tablaOT.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tablaOT_CellMouseUp);
             // 
             // id
             // 
@@ -248,6 +290,7 @@
             this.id.HeaderText = "#";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Width = 30;
             // 
             // articulo
             // 
@@ -290,6 +333,29 @@
             this.id_atencion.HeaderText = "Atencion";
             this.id_atencion.Name = "id_atencion";
             this.id_atencion.ReadOnly = true;
+            this.id_atencion.Width = 170;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarOTToolStripMenuItem,
+            this.terminarOTToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 48);
+            // 
+            // editarOTToolStripMenuItem
+            // 
+            this.editarOTToolStripMenuItem.Name = "editarOTToolStripMenuItem";
+            this.editarOTToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editarOTToolStripMenuItem.Text = "Editar O.T";
+            this.editarOTToolStripMenuItem.Click += new System.EventHandler(this.editarOTToolStripMenuItem_Click);
+            // 
+            // terminarOTToolStripMenuItem
+            // 
+            this.terminarOTToolStripMenuItem.Name = "terminarOTToolStripMenuItem";
+            this.terminarOTToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.terminarOTToolStripMenuItem.Text = "Terminar O.T";
+            this.terminarOTToolStripMenuItem.Click += new System.EventHandler(this.terminarOTToolStripMenuItem_Click);
             // 
             // OT
             // 
@@ -312,6 +378,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaOT)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -335,6 +402,12 @@
         private System.Windows.Forms.Button btGuardar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView tablaOT;
+        private System.Windows.Forms.Button btEditar;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem editarOTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem terminarOTToolStripMenuItem;
+        private System.Windows.Forms.Label lbidOT;
+        private System.Windows.Forms.Label lbShowOT;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tecnico;

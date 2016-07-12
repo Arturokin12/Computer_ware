@@ -32,7 +32,34 @@ namespace Computer_ware
 
         private void btEnviar_Click(object sender, EventArgs e)
         {
+            if (txtUbicación.Text != "")
+            {
+                try
+                {
+                    var consulta = from envia in ent.envio where envia.estado.Equals("Enviado") && envia.id_articulo.ToString().Equals(lbIDArticulo.Text) select envia;
 
+                    if (consulta.ToList().Count == 0)
+                    {
+                        envio en = new envio
+                        {
+                            id_articulo = Convert.ToInt32(lbIDArticulo.Text),
+                            ubicacion = txtUbicación.Text,
+                            fecha_envio = Convert.ToDateTime(dateTimePicker1.Text),
+                            estado = "Enviado"
+                        };
+                        ent.envio.Add(en);
+                        ent.SaveChanges();
+                        this.Close();
+                    }else
+                    {
+                        MessageBox.Show("Ya hay un envío registrado a éste artículo que aún está pendiente.", "Artículo ya enviado");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al registrar Envío \n"+ex.InnerException.ToString().Substring(0,200), "Error Crítico");
+                }
+            }
         }
     }
 }

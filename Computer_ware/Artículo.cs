@@ -40,7 +40,10 @@ namespace Computer_ware
 
         private void Artículo_Load(object sender, EventArgs e)
         {
-            
+
+            cbEstado.SelectedIndex = 0;
+            cbEstadoOT.SelectedIndex = 0;
+
             //cbAtencion
             BindingList<atencion> atenciones = new BindingList<atencion>(con.getAtenciones());
             atenciones.Insert(0, new atencion { id_atencion = 0, descripcion = "Seleccione" });
@@ -93,7 +96,7 @@ namespace Computer_ware
                 txtSerie.Text = a.serie;
                 txtObs.Text = a.observacion;
                 dtFecha.Text = a.fecha_recepcion.ToShortDateString();
-                cbEstado.SelectedText = a.estado;
+                cbEstado.SelectedValue = a.estado;
                 txtLinea.Text = a.Linea;
                 txtOS.Text = a.id_os.ToString();
             }
@@ -155,16 +158,17 @@ namespace Computer_ware
             string obs = txtObs.Text;
             string linea = txtLinea.Text;
             string os = txtOS.Text;
-            string estado = cbEstado.SelectedItem.ToString();
-
+            
             //ot
-            string atencion = cbAtencion.SelectedValue.ToString();
-            string tecnico = cbTecnico.SelectedValue.ToString();
+
             string fecha_inicio = dtFechaInicio.Text;
             string fecha_termino = dtFechaTer.Text;
             
             if (marca != "" && modelo != "" && serie != "" && cbTecnico.SelectedIndex != 0 && obs != "" && cbEstado.SelectedIndex != 0 && linea != "" && os != "" && cbAtencion.SelectedIndex != 0)
             {
+                string estado = cbEstado.SelectedItem.ToString();
+                string atencion = cbAtencion.SelectedValue.ToString();
+                string tecnico = cbTecnico.SelectedValue.ToString();
                 if (ent.Orden_servicio.Find(Convert.ToInt32(os)) != null)
                 {
                     Articulo art = new Articulo
@@ -175,7 +179,8 @@ namespace Computer_ware
                         observacion = obs,
                         Linea = linea,
                         id_os = Convert.ToInt32(os),
-                        fecha_recepcion = DateTime.Now
+                        fecha_recepcion = DateTime.Now,
+                        estado = estado
                     };
                     bool b = false;
                     try
