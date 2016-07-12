@@ -72,6 +72,7 @@
             // 
             // cbAtencion
             // 
+            this.cbAtencion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAtencion.FormattingEnabled = true;
             this.cbAtencion.Items.AddRange(new object[] {
             "Seleccione",

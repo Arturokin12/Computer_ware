@@ -12,19 +12,18 @@ namespace Computer_ware.Modelo
     using System;
     using System.Collections.Generic;
     
-    public partial class tecnico
+    public partial class Orden_trabajo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tecnico()
-        {
-            this.Orden_trabajo = new HashSet<Orden_trabajo>();
-        }
-    
+        public int id_ot { get; set; }
+        public int id_articulo { get; set; }
         public int id_tecnico { get; set; }
-        public string Nombre { get; set; }
-        public string estado { get; set; }
+        public string Estado { get; set; }
+        public Nullable<System.DateTime> Fecha_inicio { get; set; }
+        public Nullable<System.DateTime> Fecha_termino { get; set; }
+        public int id_atencion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orden_trabajo> Orden_trabajo { get; set; }
+        public virtual Articulo Articulo { get; set; }
+        public virtual tecnico tecnico { get; set; }
+        public virtual atencion atencion { get; set; }
     }
 }

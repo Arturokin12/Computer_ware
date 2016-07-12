@@ -52,6 +52,8 @@ namespace Computer_ware
             //this.Hide();
             OS o = new OS();
             o.txtBuscar.Text = lbNombreCliente.Text;
+            o.btEditar.Visible = false;
+            o.btGuardarOS.Visible = true;
             o.ShowDialog();
             //this.Close();
         }
@@ -63,7 +65,12 @@ namespace Computer_ware
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VerOS o = new VerOS();
+            
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

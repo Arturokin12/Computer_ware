@@ -63,6 +63,16 @@ namespace Computer_ware.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _120169_Papel_de_Parede_Somente_azul_1680x1050 {
+            get {
+                object obj = ResourceManager.GetObject("120169_Papel-de-Parede-Somente-azul_1680x1050", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Coasin {
             get {
                 object obj = ResourceManager.GetObject("Coasin", resourceCulture);
@@ -83,9 +93,29 @@ namespace Computer_ware.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cuadro_celeste_con_blanco_1366x768 {
+            get {
+                object obj = ResourceManager.GetObject("cuadro_celeste_con_blanco-1366x768", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap degradados_azules_1920x1200_127 {
             get {
                 object obj = ResourceManager.GetObject("degradados_azules_1920x1200_127", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fondos_de_pantalla_azul_degrado_400x225 {
+            get {
+                object obj = ResourceManager.GetObject("fondos-de-pantalla-azul-degrado-400x225", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

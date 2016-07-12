@@ -31,6 +31,7 @@ namespace Computer_ware.Modelo
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<envio> envio { get; set; }
         public virtual DbSet<Orden_servicio> Orden_servicio { get; set; }
+        public virtual DbSet<Orden_trabajo> Orden_trabajo { get; set; }
         public virtual DbSet<tecnico> tecnico { get; set; }
     }
 }

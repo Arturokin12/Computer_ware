@@ -294,12 +294,14 @@
             this.verClienteToolStripMenuItem.Name = "verClienteToolStripMenuItem";
             this.verClienteToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.verClienteToolStripMenuItem.Text = "Ver Cliente";
+            this.verClienteToolStripMenuItem.Click += new System.EventHandler(this.verClienteToolStripMenuItem_Click);
             // 
             // editarOSToolStripMenuItem
             // 
             this.editarOSToolStripMenuItem.Name = "editarOSToolStripMenuItem";
             this.editarOSToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editarOSToolStripMenuItem.Text = "Editar O.S";
+            this.editarOSToolStripMenuItem.Click += new System.EventHandler(this.editarOSToolStripMenuItem_Click);
             // 
             // VerOS
             // 

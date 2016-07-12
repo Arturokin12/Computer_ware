@@ -53,7 +53,6 @@
             this.editarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verOrdenesDeServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenesDeServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.artículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -253,6 +252,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(730, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // archivoToolStripMenuItem
             // 
@@ -276,8 +276,7 @@
             // 
             this.verOrdenesDeServicioToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.verOrdenesDeServicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ordenesDeServicioToolStripMenuItem,
-            this.artículosToolStripMenuItem});
+            this.ordenesDeServicioToolStripMenuItem});
             this.verOrdenesDeServicioToolStripMenuItem.Name = "verOrdenesDeServicioToolStripMenuItem";
             this.verOrdenesDeServicioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verOrdenesDeServicioToolStripMenuItem.Text = "Ver";
@@ -288,13 +287,6 @@
             this.ordenesDeServicioToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.ordenesDeServicioToolStripMenuItem.Text = "Ordenes de servicio";
             this.ordenesDeServicioToolStripMenuItem.Click += new System.EventHandler(this.ordenesDeServicioToolStripMenuItem_Click);
-            // 
-            // artículosToolStripMenuItem
-            // 
-            this.artículosToolStripMenuItem.Name = "artículosToolStripMenuItem";
-            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.artículosToolStripMenuItem.Text = "Artículos";
-            this.artículosToolStripMenuItem.Click += new System.EventHandler(this.artículosToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -345,7 +337,6 @@
         private System.Windows.Forms.ToolStripMenuItem editarClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verOrdenesDeServicioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenesDeServicioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem artículosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         public System.Windows.Forms.Label lbArticulosCliente;
         public System.Windows.Forms.Label lbCantidadOS;

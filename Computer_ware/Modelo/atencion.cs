@@ -17,13 +17,13 @@ namespace Computer_ware.Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public atencion()
         {
-            this.Articulo = new HashSet<Articulo>();
+            this.Orden_trabajo = new HashSet<Orden_trabajo>();
         }
     
         public int id_atencion { get; set; }
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Articulo> Articulo { get; set; }
+        public virtual ICollection<Orden_trabajo> Orden_trabajo { get; set; }
     }
 }

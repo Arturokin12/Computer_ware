@@ -23,11 +23,10 @@ namespace Computer_ware.Modelo
         public int id_os { get; set; }
         public int id_cliente { get; set; }
         public System.DateTime fecha_inicio { get; set; }
-        public int id_tecnico { get; set; }
+        public string estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulo> Articulo { get; set; }
         public virtual Cliente Cliente { get; set; }
-        public virtual tecnico tecnico { get; set; }
     }
 }

@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tecnicos));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nomre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btGuardarTec = new System.Windows.Forms.Button();
             this.txtNombreTec = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nomre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -46,6 +46,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -56,35 +57,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(440, 150);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id_tecnico";
-            this.id.HeaderText = "#";
-            this.id.Name = "id";
-            // 
-            // Nomre
-            // 
-            this.Nomre.DataPropertyName = "Nombre";
-            this.Nomre.HeaderText = "Nombre";
-            this.Nomre.Name = "Nomre";
-            this.Nomre.Width = 180;
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "estado";
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.Estado.Name = "Estado";
-            // 
-            // orden
-            // 
-            this.orden.DataPropertyName = "orden_servicio";
-            this.orden.HeaderText = "orden";
-            this.orden.Name = "orden";
-            this.orden.Visible = false;
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // groupBox1
             // 
@@ -98,7 +71,7 @@
             this.groupBox1.Size = new System.Drawing.Size(253, 199);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Agregar Técnico";
             // 
             // btGuardarTec
             // 
@@ -125,6 +98,36 @@
             this.label1.Size = new System.Drawing.Size(57, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id_tecnico";
+            this.id.HeaderText = "#";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // Nomre
+            // 
+            this.Nomre.DataPropertyName = "Nombre";
+            this.Nomre.HeaderText = "Nombre";
+            this.Nomre.Name = "Nomre";
+            this.Nomre.Width = 180;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.Estado.Name = "Estado";
+            // 
+            // orden
+            // 
+            this.orden.DataPropertyName = "orden_trabajo";
+            this.orden.HeaderText = "orden";
+            this.orden.Name = "orden";
+            this.orden.Visible = false;
             // 
             // Tecnicos
             // 

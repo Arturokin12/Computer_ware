@@ -18,6 +18,7 @@ namespace Computer_ware.Modelo
         public Articulo()
         {
             this.envio = new HashSet<envio>();
+            this.Orden_trabajo = new HashSet<Orden_trabajo>();
         }
     
         public int id_articulo { get; set; }
@@ -28,13 +29,12 @@ namespace Computer_ware.Modelo
         public System.DateTime fecha_recepcion { get; set; }
         public string estado { get; set; }
         public string Linea { get; set; }
-        public int id_tecnico { get; set; }
-        public int id_atencion { get; set; }
         public int id_os { get; set; }
     
-        public virtual atencion atencion { get; set; }
         public virtual Orden_servicio Orden_servicio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<envio> envio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orden_trabajo> Orden_trabajo { get; set; }
     }
 }

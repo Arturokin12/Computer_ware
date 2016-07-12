@@ -42,6 +42,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtBuscarNombre = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tablaClientes = new System.Windows.Forms.DataGridView();
             this.ID_cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,8 +53,6 @@
             this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBuscarNombre = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
@@ -184,10 +184,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clientes";
             // 
+            // txtBuscarNombre
+            // 
+            this.txtBuscarNombre.Location = new System.Drawing.Point(84, 27);
+            this.txtBuscarNombre.Name = "txtBuscarNombre";
+            this.txtBuscarNombre.Size = new System.Drawing.Size(153, 22);
+            this.txtBuscarNombre.TabIndex = 11;
+            this.txtBuscarNombre.TextChanged += new System.EventHandler(this.txtBuscarNombre_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 16);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Buscar";
+            // 
             // tablaClientes
             // 
             this.tablaClientes.AllowUserToAddRows = false;
             this.tablaClientes.AllowUserToDeleteRows = false;
+            this.tablaClientes.AllowUserToResizeRows = false;
             this.tablaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_cliente,
@@ -263,23 +281,6 @@
             this.orden.HeaderText = "Orden_servicio";
             this.orden.Name = "orden";
             this.orden.Visible = false;
-            // 
-            // txtBuscarNombre
-            // 
-            this.txtBuscarNombre.Location = new System.Drawing.Point(84, 27);
-            this.txtBuscarNombre.Name = "txtBuscarNombre";
-            this.txtBuscarNombre.Size = new System.Drawing.Size(153, 22);
-            this.txtBuscarNombre.TabIndex = 11;
-            this.txtBuscarNombre.TextChanged += new System.EventHandler(this.txtBuscarNombre_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 30);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 16);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Buscar";
             // 
             // ClienteIndex
             // 

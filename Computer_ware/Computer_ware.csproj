@@ -62,6 +62,12 @@
     <Compile Include="Artículo.Designer.cs">
       <DependentUpon>Artículo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bodega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bodega.Designer.cs">
+      <DependentUpon>Bodega.cs</DependentUpon>
+    </Compile>
     <Compile Include="CambiarAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,12 @@
     </Compile>
     <Compile Include="ClienteIndex.Designer.cs">
       <DependentUpon>ClienteIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuracion.Designer.cs">
+      <DependentUpon>Configuracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Controlador\ControladorGen.cs" />
     <Compile Include="EditarEstadoArt.cs">
@@ -133,6 +145,9 @@
     <Compile Include="Modelo\Orden_servicio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Orden_trabajo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\tecnico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -141,6 +156,12 @@
     </Compile>
     <Compile Include="OS.Designer.cs">
       <DependentUpon>OS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OT.Designer.cs">
+      <DependentUpon>OT.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,11 +186,17 @@
     <EmbeddedResource Include="Artículo.resx">
       <DependentUpon>Artículo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Bodega.resx">
+      <DependentUpon>Bodega.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CambiarAtencion.resx">
       <DependentUpon>CambiarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClienteIndex.resx">
       <DependentUpon>ClienteIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuracion.resx">
+      <DependentUpon>Configuracion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditarEstadoArt.resx">
       <DependentUpon>EditarEstadoArt.cs</DependentUpon>
@@ -185,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OS.resx">
       <DependentUpon>OS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OT.resx">
+      <DependentUpon>OT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -227,16 +257,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modelo\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Modelo\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\www.png" />
     <None Include="Resources\Warehouse1.png" />
     <None Include="Resources\coasin-telecom-banner.jpg" />
@@ -247,6 +267,21 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modelo\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\120169_Papel-de-Parede-Somente-azul_1680x1050.jpg" />
+    <None Include="Resources\fondos-de-pantalla-azul-degrado-400x225.jpg" />
+    <None Include="Resources\cuadro_celeste_con_blanco-1366x768.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,6 +21,7 @@ namespace Computer_ware
 
         ControladorGen con = new ControladorGen();
         WarehouseEntities ent = new WarehouseEntities();
+        string id_editar = "";
 
         protected override void WndProc(ref Message m)
         {
@@ -46,13 +47,7 @@ namespace Computer_ware
             cbCliente.DataSource = clientes;
             cbCliente.ValueMember = "id_cliente";
             cbCliente.DisplayMember = "Nombre";
-
-            //cbtecnico
-            BindingList<tecnico> tecnicos = new BindingList<tecnico>(con.getTecnicos());
-            tecnicos.Insert(0, new tecnico { id_tecnico = 0, Nombre = "Seleccione" });
-            cbTecnico.DataSource = tecnicos;
-            cbTecnico.ValueMember = "id_tecnico";
-            cbTecnico.DisplayMember = "nombre";
+            
 
             if (txtBuscar.Text == "")
             {
@@ -60,13 +55,11 @@ namespace Computer_ware
                 {
                     var consulta = from o in ent.Orden_servicio
                                    join c in ent.Cliente on o.id_cliente equals c.id_cliente
-                                   join t in ent.tecnico on o.id_tecnico equals t.id_tecnico
                                    select new Orden_Serv
                                    {
                                        id_os = o.id_os,
                                        cliente = c.Nombre,
-                                       fecha_inicio = o.fecha_inicio,
-                                       tecnico = t.Nombre
+                                       fecha_inicio = o.fecha_inicio
                                    };
                     BindingList<Orden_Serv> lista = new BindingList<Orden_Serv>(consulta.ToList<Orden_Serv>());
                     List<Orden_Serv> lista2 = new List<Orden_Serv>();
@@ -83,14 +76,12 @@ namespace Computer_ware
                 {
                     var consulta = from o in ent.Orden_servicio
                                    join c in ent.Cliente on o.id_cliente equals c.id_cliente
-                                   join t in ent.tecnico on o.id_tecnico equals t.id_tecnico
-                                   where c.Nombre.Contains(txtBuscar.Text) || t.Nombre.Contains(txtBuscar.Text)
+                                   where c.Nombre.Contains(txtBuscar.Text)
                                    select new
                                    {
                                        o.id_os,
                                        cliente = c.Nombre,
-                                       o.fecha_inicio,
-                                       tecnico = t.Nombre
+                                       o.fecha_inicio
                                    };
                     tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
                 }
@@ -99,16 +90,19 @@ namespace Computer_ware
                     MessageBox.Show("Error al buscar O.S" + ex.InnerException, "Error Crítico");
                 }
             }
-
+            if (txtOS.Text != "")
+            {
+                Orden_servicio o = ent.Orden_servicio.Find(Convert.ToInt32(txtOS.Text));
+                cbCliente.SelectedValue = o.id_cliente;
+            }
         }
 
         private void btGuardarOS_Click(object sender, EventArgs e)
         {
             string id_os = txtOS.Text;
             string fecha_inicio = dtFecha.Text;
-            if (cbCliente.SelectedIndex != 0 && cbTecnico.SelectedIndex != 0 && id_os != "")
+            if (cbCliente.SelectedIndex != 0 && id_os != "")
             {
-                string id_tecnico = cbTecnico.SelectedValue.ToString();
                 string id_cliente = cbCliente.SelectedValue.ToString();
                 DateTime nueva = DateTime.Now;
                 string f = fecha_inicio + " " + nueva.Hour + ":" + nueva.Minute + ":" + nueva.Second + "." + nueva.Millisecond;
@@ -117,30 +111,31 @@ namespace Computer_ware
                 {
                     id_os = Convert.ToInt32(id_os),
                     fecha_inicio = fecha,
-                    id_cliente = Convert.ToInt32(id_cliente),
-                    id_tecnico = Convert.ToInt32(id_tecnico)
+                    id_cliente = Convert.ToInt32(id_cliente)
                 };
                 try
                 {
                     ent.Orden_servicio.Add(o);
                     ent.SaveChanges();
-                    MessageBox.Show("Agregado!", "Éxito al guardar");
                     var consulta = from or in ent.Orden_servicio
                                    join c in ent.Cliente on or.id_cliente equals c.id_cliente
-                                   join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                    select new
                                    {
                                        or.id_os,
                                        cliente = c.Nombre,
-                                       or.fecha_inicio,
-                                       tecnico = t.Nombre
+                                       or.fecha_inicio
                                    };
                     tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
+                    txtOS.Text = "";
+                    cbCliente.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error inesperado al guardar, puede que la os ya exista. \n \n" + ex.InnerException.ToString());
+                    MessageBox.Show("Error inesperado al guardar, puede que la os ya exista. \n \n" + ex.InnerException.ToString().Substring(0,100));
                 }
+            }else
+            {
+                MessageBox.Show("Ingrese todos los datos.", "Datos insuficientes");
             }
         }
 
@@ -161,18 +156,13 @@ namespace Computer_ware
             try
             {
                 var consulta = from o in ent.Orden_servicio
-                               join c in ent.Cliente
-  on o.id_cliente equals c.id_cliente
-                               join t in ent.tecnico
-on o.id_tecnico equals t.id_tecnico
-                               where
-c.Nombre.Contains(txtBuscar.Text) || t.Nombre.Contains(txtBuscar.Text)
+                               join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                               where c.Nombre.Contains(txtBuscar.Text)
                                select new
                                {
                                    o.id_os,
                                    cliente = c.Nombre,
-                                   o.fecha_inicio,
-                                   tecnico = t.Nombre
+                                   o.fecha_inicio
                                };
                 tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
             }
@@ -180,6 +170,151 @@ c.Nombre.Contains(txtBuscar.Text) || t.Nombre.Contains(txtBuscar.Text)
             {
                 MessageBox.Show("Error al buscar O.S" + ex.InnerException, "Error Crítico");
             }
+        }
+
+        private void tablaOS_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string os = "";
+                string cliente = "";
+                string fecha_inicio = "";
+                string tecnico = "";
+
+                if (tablaOS.Rows[e.RowIndex].Cells[0].Value != null)
+                {
+                    os = tablaOS.Rows[e.RowIndex].Cells[0].Value.ToString();
+                }
+                if (tablaOS.Rows[e.RowIndex].Cells[1].Value != null)
+                {
+                    cliente = tablaOS.Rows[e.RowIndex].Cells[1].Value.ToString();
+                }
+                if (tablaOS.Rows[e.RowIndex].Cells[2].Value != null)
+                {
+                    fecha_inicio = tablaOS.Rows[e.RowIndex].Cells[2].Value.ToString();
+                }
+                if (tablaOS.Rows[e.RowIndex].Cells[3].Value != null)
+                {
+                    tecnico = tablaOS.Rows[e.RowIndex].Cells[3].Value.ToString();
+                }
+                if (os != "" && cliente != "" && fecha_inicio != "" && tecnico != "")
+                {
+                    Orden_servicio o = ent.Orden_servicio.Find(Convert.ToInt32(os));
+                    
+                }
+            }
+        }
+
+        private void editarOSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Orden_servicio o = ent.Orden_servicio.Find(Convert.ToInt32(id_editar));
+            groupBox1.Text = "Editar O.S N° " + o.id_os;
+            txtOS.Text = o.id_os.ToString();
+            cbCliente.SelectedValue = o.id_cliente;
+            btCancelarEdit.Visible = true;
+            btEditar.Visible = true;
+            btGuardarOS.Visible = false;
+            dtFecha.Text = o.fecha_inicio.ToShortDateString();
+        }
+
+        private void tablaOS_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    id_editar = tablaOS.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    lbidOS.Text = id_editar;
+                    Orden_servicio o = ent.Orden_servicio.Find(Convert.ToInt32(id_editar));
+                    contextMenuStrip1.Show(this.tablaOS, e.Location);
+                    contextMenuStrip1.Show(Cursor.Position);
+                }
+            }
+        }
+
+        private void btEditar_Click(object sender, EventArgs e)
+        {
+            if (txtOS.Text != "" && cbCliente.SelectedIndex != 0)
+            {
+                Orden_servicio o = ent.Orden_servicio.Find(Convert.ToInt32(txtOS.Text));
+                if (txtOS.Text.Equals(lbidOS.Text))
+                {
+                    try
+                    {
+                        o.id_cliente = Convert.ToInt32(cbCliente.SelectedValue.ToString());
+                        o.fecha_inicio = Convert.ToDateTime(dtFecha.Text);
+                        ent.SaveChanges();
+                        var consulta = from or in ent.Orden_servicio
+                                       join c in ent.Cliente on or.id_cliente equals c.id_cliente
+                                       select new
+                                       {
+                                           or.id_os,
+                                           cliente = c.Nombre,
+                                           or.fecha_inicio
+                                       };
+                        tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
+                        btGuardarOS.Visible = true;
+                        btEditar.Visible = false;
+                        txtOS.Text = "";
+                        cbCliente.SelectedIndex = 0;
+                        dtFecha.Text = DateTime.Now.Date.ToShortDateString();
+                        groupBox1.Text = "Agregar O.S";
+                        btCancelarEdit.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error Crítico al editar O.S \n \n \n"+ex.InnerException,"Error Crítico");
+                    }
+                }else
+                {
+                    if (o == null)
+                    {
+                        try
+                        {
+                            ent.Database.ExecuteSqlCommand("Update orden_servicio set id_os = " + txtOS.Text + ", id_cliente = " + cbCliente.SelectedValue.ToString() + ", fecha_inicio = '" + dtFecha.Text + "' where id_os = " + lbidOS.Text + ";");
+                            var consulta = from or in ent.Orden_servicio
+                                           join c in ent.Cliente on or.id_cliente equals c.id_cliente
+                                           select new
+                                           {
+                                               or.id_os,
+                                               cliente = c.Nombre,
+                                               or.fecha_inicio
+                                           };
+                            tablaOS.DataSource = new BindingList<object>(consulta.ToList<object>());
+                            btGuardarOS.Visible = true;
+                            btEditar.Visible = false;
+                            txtOS.Text = "";
+                            cbCliente.SelectedIndex = 0;
+                            dtFecha.Text = DateTime.Now.Date.ToShortDateString();
+                            groupBox1.Text = "Agregar O.S";
+                            btCancelarEdit.Visible = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al editar O.S."+ex.InnerException, "Error Crítico al editar");
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("El id de la O.S ya existe, ingrese uno nuevamente.", "O.S Ya existe");
+                    }
+                }
+            }else
+            {
+                MessageBox.Show("Ingrese todos los valores.", "Datos insuficientes.");
+            }
+        }
+
+        private void btCancelarEdit_Click(object sender, EventArgs e)
+        {
+            btGuardarOS.Visible = true;
+            btEditar.Visible = false;
+            txtOS.Text = "";
+            cbCliente.SelectedIndex = 0;
+            dtFecha.Text = DateTime.Now.Date.ToShortDateString();
+            groupBox1.Text = "Agregar O.S";
+            btCancelarEdit.Visible = false;
         }
     }
 }

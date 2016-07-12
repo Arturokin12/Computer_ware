@@ -31,6 +31,8 @@ namespace Computer_ware
 
         private void Index_Load(object sender, EventArgs e)
         {
+            groupBox2.Paint += PaintBorderlessGroupBox;
+
             tablaArticulos.DataSource = con.getArticulos();
 
             //cbCliente
@@ -44,7 +46,7 @@ namespace Computer_ware
             BindingList<atencion> atenciones = new BindingList<atencion>(con.getAtenciones());
             atenciones.Insert(0, new atencion { id_atencion = 0, descripcion = "Seleccione"});
             cbAtencion.DataSource = atenciones;
-            cbAtencion.ValueMember = "descripcion";
+            cbAtencion.ValueMember = "id_atencion";
             cbAtencion.DisplayMember = "descripcion";
 
             //cbtecnico
@@ -53,6 +55,9 @@ namespace Computer_ware
             cbTecnico.DataSource = tecnicos;
             cbTecnico.ValueMember = "nombre";
             cbTecnico.DisplayMember = "nombre";
+
+            cbEstadoOT.SelectedIndex = 0;
+            cbEstado.SelectedIndex = 0;
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
@@ -60,6 +65,8 @@ namespace Computer_ware
             string cliente = cbCliente.SelectedValue.ToString();
             string atencion = cbAtencion.SelectedValue.ToString();
             string tecnico = cbTecnico.SelectedValue.ToString();
+            string estadoot = cbEstadoOT.SelectedItem.ToString();
+            string ESTADO = cbEstado.SelectedItem.ToString();
 
             if (cliente == "Seleccione")
             {
@@ -73,11 +80,23 @@ namespace Computer_ware
             {
                 tecnico = "";
             }
+            if (estadoot == "Seleccione")
+            {
+                estadoot = "";
+            }
+            if (ESTADO == "Seleccione")
+            {
+                ESTADO = "";
+            }
+            if (atencion == "0")
+            {
+                atencion = "";
+            }
             Articulo art = new Articulo {
-                marca = txtMarca.Text, modelo = txtModelo.Text, estado = cbEstado.SelectedText,
-                serie = txtSerie.Text, Linea = txtLinea.Text, fecha_recepcion = Convert.ToDateTime(dtFechaR.Text)
+                marca = txtMarca.Text, modelo = txtModelo.Text, estado = ESTADO,
+                serie = txtSerie.Text, Linea = txtLinea.Text, fecha_recepcion = Convert.ToDateTime(dtFechaOT.Text)
             };
-            tablaArticulos.DataSource = con.buscarArticulos(art, atencion, tecnico);
+            tablaArticulos.DataSource = con.buscarArticulos(art, atencion, tecnico,estadoot, cliente);
         }
 
         private void txtOS_TextChanged(object sender, EventArgs e)
@@ -92,6 +111,7 @@ namespace Computer_ware
                 if (e.Button == MouseButtons.Right)
                 {
                     id_mouseClick = tablaArticulos.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    
                     contextMenuStrip1.Show(tablaArticulos, e.Location);
                     contextMenuStrip1.Show(Cursor.Position);
                 }
@@ -128,6 +148,8 @@ namespace Computer_ware
         private void oSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OS o = new OS();
+            o.btEditar.Visible = false;
+            o.btGuardarOS.Visible = true;
             o.ShowDialog();
         }
 
@@ -137,6 +159,8 @@ namespace Computer_ware
             {
                 string id_art = id_mouseClick;
                 Artículo ar = new Artículo();
+                ar.groupBox2.Enabled = false;
+                ar.chkClose.Visible = false;
                 ar.lbIDArt.Text = id_art;
                 ar.btGuardar.Visible = false;
                 ar.btEditar.Visible = true;
@@ -210,8 +234,9 @@ namespace Computer_ware
             var consulta = from a in ent.Articulo
                            join o in ent.Orden_servicio on a.id_os equals o.id_os
                            join c in ent.Cliente on o.id_cliente equals c.id_cliente
+                           where a.id_articulo.ToString() == id_mouseClick
                            select c;
-            if (consulta.ToList().ElementAt(0) != null)
+            if (consulta.ToList().Count == 1)
             {
                 Cliente c = consulta.ToList().ElementAt(0);
                 v.lbidCliente.Text = c.id_cliente+"";
@@ -250,6 +275,53 @@ namespace Computer_ware
             {
                 e.Handled = true;
             }
+        }
+        
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            box.Parent.BackColor = System.Drawing.Color.Black;
+        }
+
+        private void agregarOTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OT o = new OT();
+            o.lbidArt.Text = id_mouseClick;
+            o.ShowDialog();
+        }
+
+        private void txtBuscarOT_TextChanged(object sender, EventArgs e)
+        {
+            tablaArticulos.DataSource = con.buscarPorOT(txtBuscarOT.Text);
+        }
+
+        private void btClean_Click(object sender, EventArgs e)
+        {
+            txtMarca.Text = "";
+            txtModelo.Text = "";
+            txtLinea.Text = "";
+            txtSerie.Text = "";
+            cbAtencion.SelectedIndex = 0;
+            cbCliente.SelectedIndex = 0;
+            cbEstado.SelectedIndex = 0;
+            cbEstadoOT.SelectedIndex = 0;
+            cbTecnico.SelectedIndex = 0;
+        }
+
+        private void btMostrar_Click(object sender, EventArgs e)
+        {
+            tablaArticulos.DataSource = con.getArticulos();
+        }
+
+        private void configuraciónesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Configuracion c = new Configuracion();
+            c.ShowDialog();
+        }
+
+        private void bodegaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

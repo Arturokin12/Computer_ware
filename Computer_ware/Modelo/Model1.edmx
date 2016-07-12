@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WarehouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WarehouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="contraseña" />
@@ -23,8 +23,6 @@
           <Property Name="fecha_recepcion" Type="datetime" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" />
           <Property Name="Linea" Type="varchar" MaxLength="50" />
-          <Property Name="id_tecnico" Type="int" Nullable="false" />
-          <Property Name="id_atencion" Type="int" Nullable="false" />
           <Property Name="id_os" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="atencion">
@@ -63,7 +61,19 @@
           <Property Name="id_os" Type="int" Nullable="false" />
           <Property Name="id_cliente" Type="int" Nullable="false" />
           <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Orden_trabajo">
+          <Key>
+            <PropertyRef Name="id_ot" />
+          </Key>
+          <Property Name="id_ot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_articulo" Type="int" Nullable="false" />
           <Property Name="id_tecnico" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_inicio" Type="datetime" />
+          <Property Name="Fecha_termino" Type="datetime" />
+          <Property Name="id_atencion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tecnico">
           <Key>
@@ -73,18 +83,6 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Articulo_atencion">
-          <End Role="atencion" Type="Self.atencion" Multiplicity="1" />
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="atencion">
-              <PropertyRef Name="id_atencion" />
-            </Principal>
-            <Dependent Role="Articulo">
-              <PropertyRef Name="id_atencion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Articulo_Orden_servicio">
           <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="1" />
           <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
@@ -121,14 +119,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orden_servicio_tecnico">
+        <Association Name="FK_Orden_trabajo_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="Orden_trabajo" Type="Self.Orden_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="Orden_trabajo">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_trabajo_atencion">
+          <End Role="atencion" Type="Self.atencion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orden_trabajo" Type="Self.Orden_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atencion">
+              <PropertyRef Name="id_atencion" />
+            </Principal>
+            <Dependent Role="Orden_trabajo">
+              <PropertyRef Name="id_atencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_trabajo_tecnico">
           <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
-          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <End Role="Orden_trabajo" Type="Self.Orden_trabajo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tecnico">
               <PropertyRef Name="id_tecnico" />
             </Principal>
-            <Dependent Role="Orden_servicio">
+            <Dependent Role="Orden_trabajo">
               <PropertyRef Name="id_tecnico" />
             </Dependent>
           </ReferentialConstraint>
@@ -140,11 +164,8 @@
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="envio" EntityType="Self.envio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orden_servicio" EntityType="Self.Orden_servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden_trabajo" EntityType="Self.Orden_trabajo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Articulo_atencion" Association="Self.FK_Articulo_atencion">
-            <End Role="atencion" EntitySet="atencion" />
-            <End Role="Articulo" EntitySet="Articulo" />
-          </AssociationSet>
           <AssociationSet Name="FK_Articulo_Orden_servicio" Association="Self.FK_Articulo_Orden_servicio">
             <End Role="Orden_servicio" EntitySet="Orden_servicio" />
             <End Role="Articulo" EntitySet="Articulo" />
@@ -157,13 +178,20 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Orden_servicio" EntitySet="Orden_servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orden_servicio_tecnico" Association="Self.FK_Orden_servicio_tecnico">
+          <AssociationSet Name="FK_Orden_trabajo_Articulo" Association="Self.FK_Orden_trabajo_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_trabajo_atencion" Association="Self.FK_Orden_trabajo_atencion">
+            <End Role="atencion" EntitySet="atencion" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_trabajo_tecnico" Association="Self.FK_Orden_trabajo_tecnico">
             <End Role="tecnico" EntitySet="tecnico" />
-            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -185,12 +213,10 @@
           <Property Name="fecha_recepcion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Linea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
-          <Property Name="id_atencion" Type="Int32" Nullable="false" />
           <Property Name="id_os" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="atencion" Relationship="Self.FK_Articulo_atencion" FromRole="Articulo" ToRole="atencion" />
           <NavigationProperty Name="Orden_servicio" Relationship="Self.FK_Articulo_Orden_servicio" FromRole="Articulo" ToRole="Orden_servicio" />
           <NavigationProperty Name="envio" Relationship="Self.FK_envio_Articulo" FromRole="Articulo" ToRole="envio" />
+          <NavigationProperty Name="Orden_trabajo" Relationship="Self.FK_Orden_trabajo_Articulo" FromRole="Articulo" ToRole="Orden_trabajo" />
         </EntityType>
         <EntityType Name="atencion">
           <Key>
@@ -198,7 +224,7 @@
           </Key>
           <Property Name="id_atencion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_atencion" FromRole="atencion" ToRole="Articulo" />
+          <NavigationProperty Name="Orden_trabajo" Relationship="WarehouseModel.FK_Orden_trabajo_atencion" FromRole="atencion" ToRole="Orden_trabajo" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -231,10 +257,24 @@
           <Property Name="id_os" Type="Int32" Nullable="false" />
           <Property Name="id_cliente" Type="Int32" Nullable="false" />
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_Orden_servicio" FromRole="Orden_servicio" ToRole="Articulo" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Orden_servicio_Cliente" FromRole="Orden_servicio" ToRole="Cliente" />
-          <NavigationProperty Name="tecnico" Relationship="Self.FK_Orden_servicio_tecnico" FromRole="Orden_servicio" ToRole="tecnico" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Orden_trabajo">
+          <Key>
+            <PropertyRef Name="id_ot" />
+          </Key>
+          <Property Name="id_ot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_articulo" Type="Int32" Nullable="false" />
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_inicio" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_termino" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_Orden_trabajo_Articulo" FromRole="Orden_trabajo" ToRole="Articulo" />
+          <NavigationProperty Name="tecnico" Relationship="Self.FK_Orden_trabajo_tecnico" FromRole="Orden_trabajo" ToRole="tecnico" />
+          <Property Name="id_atencion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="atencion" Relationship="WarehouseModel.FK_Orden_trabajo_atencion" FromRole="Orden_trabajo" ToRole="atencion" />
         </EntityType>
         <EntityType Name="tecnico">
           <Key>
@@ -243,20 +283,8 @@
           <Property Name="id_tecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Orden_servicio" Relationship="Self.FK_Orden_servicio_tecnico" FromRole="tecnico" ToRole="Orden_servicio" />
+          <NavigationProperty Name="Orden_trabajo" Relationship="Self.FK_Orden_trabajo_tecnico" FromRole="tecnico" ToRole="Orden_trabajo" />
         </EntityType>
-        <Association Name="FK_Articulo_atencion">
-          <End Role="atencion" Type="Self.atencion" Multiplicity="1" />
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="atencion">
-              <PropertyRef Name="id_atencion" />
-            </Principal>
-            <Dependent Role="Articulo">
-              <PropertyRef Name="id_atencion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Articulo_Orden_servicio">
           <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="1" />
           <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
@@ -281,6 +309,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orden_trabajo_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="Orden_trabajo" Type="Self.Orden_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="Orden_trabajo">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orden_servicio_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
@@ -293,14 +333,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orden_servicio_tecnico">
+        <Association Name="FK_Orden_trabajo_tecnico">
           <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
-          <End Role="Orden_servicio" Type="Self.Orden_servicio" Multiplicity="*" />
+          <End Role="Orden_trabajo" Type="Self.Orden_trabajo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tecnico">
               <PropertyRef Name="id_tecnico" />
             </Principal>
-            <Dependent Role="Orden_servicio">
+            <Dependent Role="Orden_trabajo">
               <PropertyRef Name="id_tecnico" />
             </Dependent>
           </ReferentialConstraint>
@@ -312,11 +352,8 @@
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="envio" EntityType="Self.envio" />
           <EntitySet Name="Orden_servicio" EntityType="Self.Orden_servicio" />
+          <EntitySet Name="Orden_trabajo" EntityType="Self.Orden_trabajo" />
           <EntitySet Name="tecnico" EntityType="Self.tecnico" />
-          <AssociationSet Name="FK_Articulo_atencion" Association="Self.FK_Articulo_atencion">
-            <End Role="atencion" EntitySet="atencion" />
-            <End Role="Articulo" EntitySet="Articulo" />
-          </AssociationSet>
           <AssociationSet Name="FK_Articulo_Orden_servicio" Association="Self.FK_Articulo_Orden_servicio">
             <End Role="Orden_servicio" EntitySet="Orden_servicio" />
             <End Role="Articulo" EntitySet="Articulo" />
@@ -325,15 +362,37 @@
             <End Role="Articulo" EntitySet="Articulo" />
             <End Role="envio" EntitySet="envio" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orden_trabajo_Articulo" Association="Self.FK_Orden_trabajo_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orden_servicio_Cliente" Association="Self.FK_Orden_servicio_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Orden_servicio" EntitySet="Orden_servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orden_servicio_tecnico" Association="Self.FK_Orden_servicio_tecnico">
+          <AssociationSet Name="FK_Orden_trabajo_tecnico" Association="Self.FK_Orden_trabajo_tecnico">
             <End Role="tecnico" EntitySet="tecnico" />
-            <End Role="Orden_servicio" EntitySet="Orden_servicio" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_trabajo_atencion" Association="WarehouseModel.FK_Orden_trabajo_atencion">
+            <End Role="atencion" EntitySet="atencion" />
+            <End Role="Orden_trabajo" EntitySet="Orden_trabajo" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Orden_trabajo_atencion">
+          <End Type="WarehouseModel.atencion" Role="atencion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WarehouseModel.Orden_trabajo" Role="Orden_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atencion">
+              <PropertyRef Name="id_atencion" />
+            </Principal>
+            <Dependent Role="Orden_trabajo">
+              <PropertyRef Name="id_atencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,8 +417,6 @@
                 <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-                <ScalarProperty Name="id_atencion" ColumnName="id_atencion" />
                 <ScalarProperty Name="id_os" ColumnName="id_os" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -399,10 +456,23 @@
           <EntitySetMapping Name="Orden_servicio">
             <EntityTypeMapping TypeName="WarehouseModel.Orden_servicio">
               <MappingFragment StoreEntitySet="Orden_servicio">
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="id_os" ColumnName="id_os" />
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden_trabajo">
+            <EntityTypeMapping TypeName="WarehouseModel.Orden_trabajo">
+              <MappingFragment StoreEntitySet="Orden_trabajo">
+                <ScalarProperty Name="id_atencion" ColumnName="id_atencion" />
+                <ScalarProperty Name="id_ot" ColumnName="id_ot" />
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
                 <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
+                <ScalarProperty Name="Fecha_termino" ColumnName="Fecha_termino" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

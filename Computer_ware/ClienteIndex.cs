@@ -53,6 +53,11 @@ namespace Computer_ware
                     ent.SaveChanges();
                     BindingList<Cliente> clientes = new BindingList<Cliente>(ent.Cliente.ToList());
                     tablaClientes.DataSource = clientes;
+                    txtCiudad.Text = "";
+                    txtComuna.Text = "";
+                    txtDireccion.Text = "";
+                    txtNombre.Text = "";
+                    txtRut.Text = "";
                 }
                 catch (Exception ex)
                 {

@@ -48,7 +48,6 @@ namespace Computer_ware
 
             Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIdArt.Text));
             groupBox1.Text = "Cambiar estado a " + a.marca + " " + a.modelo + " - " + a.serie;
-            cbAtencion.SelectedValue = a.id_atencion;
         }
 
         private void btlisto_Click(object sender, EventArgs e)
@@ -58,8 +57,8 @@ namespace Computer_ware
             {
                 try
                 {
-                    a.id_atencion = Convert.ToInt32(cbAtencion.SelectedValue.ToString());
-                    ent.SaveChanges();
+                    //a.id_atencion = Convert.ToInt32(cbAtencion.SelectedValue.ToString());
+                    //ent.SaveChanges();
                     this.Close();
                 }
                 catch (Exception ex)

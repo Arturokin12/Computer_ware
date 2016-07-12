@@ -50,7 +50,7 @@ namespace Computer_ware
             cbAtencion.SelectedIndex = 0;
 
             //cbtecnico
-            BindingList<tecnico> tecnicos = new BindingList<tecnico>(con.getTecnicos());
+            BindingList<tecnico> tecnicos = new BindingList<tecnico>(con.getTecnicosActivos());
             tecnicos.Insert(0, new tecnico { id_tecnico = 0, Nombre = "Seleccione" });
             cbTecnico.DataSource = tecnicos;
             cbTecnico.ValueMember = "id_tecnico";
@@ -95,8 +95,6 @@ namespace Computer_ware
                 dtFecha.Text = a.fecha_recepcion.ToShortDateString();
                 cbEstado.SelectedText = a.estado;
                 txtLinea.Text = a.Linea;
-                cbTecnico.SelectedValue = a.id_tecnico;
-                cbAtencion.SelectedValue = a.id_atencion;
                 txtOS.Text = a.id_os.ToString();
             }
         }
@@ -154,27 +152,28 @@ namespace Computer_ware
             string marca = txtMarca.Text;
             string modelo = txtModelo.Text;
             string serie = txtSerie.Text;
-            string tecnico = cbTecnico.SelectedValue.ToString();
             string obs = txtObs.Text;
-            
             string linea = txtLinea.Text;
-            string atencion = cbAtencion.SelectedValue.ToString();
             string os = txtOS.Text;
+            string estado = cbEstado.SelectedItem.ToString();
 
+            //ot
+            string atencion = cbAtencion.SelectedValue.ToString();
+            string tecnico = cbTecnico.SelectedValue.ToString();
+            string fecha_inicio = dtFechaInicio.Text;
+            string fecha_termino = dtFechaTer.Text;
+            
             if (marca != "" && modelo != "" && serie != "" && cbTecnico.SelectedIndex != 0 && obs != "" && cbEstado.SelectedIndex != 0 && linea != "" && os != "" && cbAtencion.SelectedIndex != 0)
             {
                 if (ent.Orden_servicio.Find(Convert.ToInt32(os)) != null)
                 {
-                    string estado = cbEstado.SelectedItem.ToString();
                     Articulo art = new Articulo
                     {
                         marca = marca,
                         modelo = modelo,
                         serie = serie,
-                        id_tecnico = Convert.ToInt32(tecnico),
                         observacion = obs,
                         Linea = linea,
-                        id_atencion = Convert.ToInt32(atencion),
                         id_os = Convert.ToInt32(os),
                         fecha_recepcion = DateTime.Now
                     };
@@ -183,9 +182,32 @@ namespace Computer_ware
                     {
                         ent.Articulo.Add(art);
                         ent.SaveChanges();
+                        Orden_trabajo ot = new Orden_trabajo
+                        {
+                            id_articulo = art.id_articulo,
+                            id_tecnico = Convert.ToInt32(tecnico),
+                            Estado = "Pendiente",
+                            Fecha_inicio = Convert.ToDateTime(fecha_inicio),
+                            Fecha_termino = Convert.ToDateTime(fecha_termino),
+                            id_atencion = Convert.ToInt32(atencion)
+                        };
+                        ent.Orden_trabajo.Add(ot);
+                        ent.SaveChanges();
                         if (chkClose.Checked == true)
                         {
                             this.Close();
+                        }else
+                        {
+                            txtMarca.Text = "";
+                            txtLinea.Text = "";
+                            txtModelo.Text = "";
+                            txtObs.Text = "";
+                            txtOS.Text = "";
+                            txtSerie.Text = "";
+                            cbAtencion.SelectedIndex = 0;
+                            cbEstado.SelectedIndex = 0;
+                            cbEstadoOT.SelectedIndex = 0;
+                            cbTecnico.SelectedIndex = 0;
                         }
                     }
                     catch (Exception ex)
@@ -206,30 +228,28 @@ namespace Computer_ware
         {
             if (lbIDArt.Text != "")
             {
-                if (txtMarca.Text != "" && txtModelo.Text != "" && txtSerie.Text != "" && txtObs.Text != "" && txtLinea.Text != "" && cbAtencion.SelectedIndex != 0 && cbEstado.SelectedIndex != 0 && cbTecnico.SelectedIndex != 0)
+                if (txtMarca.Text != "" && txtModelo.Text != "" && txtSerie.Text != "" && txtObs.Text != "" && txtLinea.Text != "" && cbEstado.SelectedIndex != 0)
                 {
-                    Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIDArt.Text));
-                    a.marca = txtMarca.Text;
-                    a.modelo = txtModelo.Text;
-                    a.serie = txtSerie.Text;
-                    a.observacion = txtObs.Text;
-                    a.estado = cbEstado.Text;
-                    a.Linea = txtLinea.Text;
-                    a.id_tecnico = Convert.ToInt32(cbTecnico.SelectedValue.ToString());
-                    a.id_atencion = Convert.ToInt32(cbAtencion.SelectedValue.ToString());
                     if (ent.Orden_servicio.Find(Convert.ToInt32(txtOS.Text)) != null)
                     {
+                        Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIDArt.Text));
+                        a.marca = txtMarca.Text;
+                        a.modelo = txtModelo.Text;
+                        a.serie = txtSerie.Text;
+                        a.observacion = txtObs.Text;
+                        a.estado = cbEstado.Text;
+                        a.Linea = txtLinea.Text;
                         a.id_os = Convert.ToInt32(txtOS.Text);
                         ent.SaveChanges();
-                        if (chkClose.Checked == true)
-                        {
-                            this.Close();
-                        }
+                        this.Close();
                     }
                     else
                     {
                         MessageBox.Show("La Orden de servicio ingresada no existe!");
                     }
+                }else
+                {
+                    MessageBox.Show("Ingrese todos los datos", "Datos insuficientes.");
                 }
             }
         }

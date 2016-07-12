@@ -63,6 +63,7 @@
             this.btEnviar.TabIndex = 4;
             this.btEnviar.Text = "Enviar";
             this.btEnviar.UseVisualStyleBackColor = true;
+            this.btEnviar.Click += new System.EventHandler(this.btEnviar_Click);
             // 
             // dateTimePicker1
             // 
