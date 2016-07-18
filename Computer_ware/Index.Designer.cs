@@ -56,37 +56,39 @@
             this.Atencion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
-            this.txtLinea = new System.Windows.Forms.TextBox();
-            this.txtModelo = new System.Windows.Forms.TextBox();
-            this.txtMarca = new System.Windows.Forms.TextBox();
-            this.txtSerie = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbCliente = new System.Windows.Forms.ComboBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtLinea = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtModelo = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtMarca = new System.Windows.Forms.TextBox();
+            this.cbCliente = new System.Windows.Forms.ComboBox();
+            this.txtSerie = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbEstadoOT = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.cbAtencion = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbTecnico = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btBuscar = new System.Windows.Forms.Button();
             this.dtFechaOT = new System.Windows.Forms.DateTimePicker();
-            this.cbTecnico = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtOS = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.agregarOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarArtículoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verArtículoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarEnvíoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cbEstadoOT = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btBuscarFechas = new System.Windows.Forms.Button();
             this.dtFechaHastaOT = new System.Windows.Forms.DateTimePicker();
@@ -99,9 +101,10 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaArticulos)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
@@ -310,28 +313,49 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox2.BackgroundImage")));
+            this.groupBox2.BackgroundImage = global::Computer_ware.Properties.Resources.cuadro_celeste_con_blanco_1366x768;
             this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox2.Controls.Add(this.cbEstado);
-            this.groupBox2.Controls.Add(this.txtLinea);
-            this.groupBox2.Controls.Add(this.txtModelo);
-            this.groupBox2.Controls.Add(this.txtMarca);
-            this.groupBox2.Controls.Add(this.txtSerie);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.cbCliente);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.groupBox7);
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(12, 103);
+            this.groupBox2.Location = new System.Drawing.Point(12, 93);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(489, 206);
+            this.groupBox2.Size = new System.Drawing.Size(948, 236);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Búsqueda Artículo";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox7.Controls.Add(this.label3);
+            this.groupBox7.Controls.Add(this.cbEstado);
+            this.groupBox7.Controls.Add(this.label9);
+            this.groupBox7.Controls.Add(this.txtLinea);
+            this.groupBox7.Controls.Add(this.label1);
+            this.groupBox7.Controls.Add(this.txtModelo);
+            this.groupBox7.Controls.Add(this.label2);
+            this.groupBox7.Controls.Add(this.txtMarca);
+            this.groupBox7.Controls.Add(this.cbCliente);
+            this.groupBox7.Controls.Add(this.txtSerie);
+            this.groupBox7.Controls.Add(this.label6);
+            this.groupBox7.Controls.Add(this.label10);
+            this.groupBox7.Location = new System.Drawing.Point(16, 19);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(485, 206);
+            this.groupBox7.TabIndex = 32;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Artículo";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Marca";
             // 
             // cbEstado
             // 
@@ -342,101 +366,131 @@
             "En laboratorio",
             "Reparado",
             "Enviado"});
-            this.cbEstado.Location = new System.Drawing.Point(77, 154);
+            this.cbEstado.Location = new System.Drawing.Point(82, 160);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(145, 21);
             this.cbEstado.TabIndex = 31;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 163);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Estado";
+            // 
             // txtLinea
             // 
-            this.txtLinea.Location = new System.Drawing.Point(77, 93);
+            this.txtLinea.Location = new System.Drawing.Point(82, 99);
             this.txtLinea.Name = "txtLinea";
             this.txtLinea.Size = new System.Drawing.Size(145, 20);
             this.txtLinea.TabIndex = 19;
             // 
-            // txtModelo
-            // 
-            this.txtModelo.Location = new System.Drawing.Point(314, 33);
-            this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(145, 20);
-            this.txtModelo.TabIndex = 17;
-            // 
-            // txtMarca
-            // 
-            this.txtMarca.Location = new System.Drawing.Point(77, 33);
-            this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(145, 20);
-            this.txtMarca.TabIndex = 15;
-            // 
-            // txtSerie
-            // 
-            this.txtSerie.Location = new System.Drawing.Point(314, 93);
-            this.txtSerie.Name = "txtSerie";
-            this.txtSerie.Size = new System.Drawing.Size(145, 20);
-            this.txtSerie.TabIndex = 14;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 96);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(35, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Línea";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(253, 36);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Modelo";
-            // 
-            // cbCliente
-            // 
-            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(314, 154);
-            this.cbCliente.Name = "cbCliente";
-            this.cbCliente.Size = new System.Drawing.Size(145, 21);
-            this.cbCliente.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Marca";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(260, 96);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Serie";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(252, 157);
+            this.label1.Location = new System.Drawing.Point(257, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cliente";
             // 
-            // label9
+            // txtModelo
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 157);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Estado";
+            this.txtModelo.Location = new System.Drawing.Point(319, 39);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(145, 20);
+            this.txtModelo.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(265, 102);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Serie";
+            // 
+            // txtMarca
+            // 
+            this.txtMarca.Location = new System.Drawing.Point(82, 39);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(145, 20);
+            this.txtMarca.TabIndex = 15;
+            // 
+            // cbCliente
+            // 
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCliente.FormattingEnabled = true;
+            this.cbCliente.Location = new System.Drawing.Point(319, 160);
+            this.cbCliente.Name = "cbCliente";
+            this.cbCliente.Size = new System.Drawing.Size(145, 21);
+            this.cbCliente.TabIndex = 1;
+            // 
+            // txtSerie
+            // 
+            this.txtSerie.Location = new System.Drawing.Point(319, 99);
+            this.txtSerie.Name = "txtSerie";
+            this.txtSerie.Size = new System.Drawing.Size(145, 20);
+            this.txtSerie.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(258, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Modelo";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(30, 102);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Línea";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox4.Controls.Add(this.cbEstadoOT);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.cbAtencion);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.cbTecnico);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Location = new System.Drawing.Point(516, 19);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(259, 206);
+            this.groupBox4.TabIndex = 22;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "O.T ";
+            // 
+            // cbEstadoOT
+            // 
+            this.cbEstadoOT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstadoOT.FormattingEnabled = true;
+            this.cbEstadoOT.Items.AddRange(new object[] {
+            "Seleccione",
+            "Pendiente",
+            "Terminado"});
+            this.cbEstadoOT.Location = new System.Drawing.Point(86, 154);
+            this.cbEstadoOT.Name = "cbEstadoOT";
+            this.cbEstadoOT.Size = new System.Drawing.Size(145, 21);
+            this.cbEstadoOT.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(28, 158);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Estado";
             // 
             // cbAtencion
             // 
@@ -446,6 +500,33 @@
             this.cbAtencion.Name = "cbAtencion";
             this.cbAtencion.Size = new System.Drawing.Size(145, 21);
             this.cbAtencion.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Atención";
+            // 
+            // cbTecnico
+            // 
+            this.cbTecnico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTecnico.FormattingEnabled = true;
+            this.cbTecnico.Location = new System.Drawing.Point(86, 92);
+            this.cbTecnico.Name = "cbTecnico";
+            this.cbTecnico.Size = new System.Drawing.Size(145, 21);
+            this.cbTecnico.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 96);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Técnico";
             // 
             // btBuscar
             // 
@@ -466,15 +547,6 @@
             this.dtFechaOT.Size = new System.Drawing.Size(145, 20);
             this.dtFechaOT.TabIndex = 13;
             // 
-            // cbTecnico
-            // 
-            this.cbTecnico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTecnico.FormattingEnabled = true;
-            this.cbTecnico.Location = new System.Drawing.Point(86, 92);
-            this.cbTecnico.Name = "cbTecnico";
-            this.cbTecnico.Size = new System.Drawing.Size(145, 21);
-            this.cbTecnico.TabIndex = 11;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -483,24 +555,6 @@
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 8;
             this.label8.Text = "Fecha Desde";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 96);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Técnico";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Atención";
             // 
             // groupBox3
             // 
@@ -529,12 +583,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarOTToolStripMenuItem,
             this.editarArtículoToolStripMenuItem,
+            this.verArtículoToolStripMenuItem,
             this.registrarEnvíoToolStripMenuItem,
             this.cambiarEstadoToolStripMenuItem,
             this.verClienteToolStripMenuItem,
             this.verOSToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 158);
             // 
             // agregarOTToolStripMenuItem
             // 
@@ -549,6 +604,13 @@
             this.editarArtículoToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.editarArtículoToolStripMenuItem.Text = "Editar Artículo";
             this.editarArtículoToolStripMenuItem.Click += new System.EventHandler(this.editarArtículoToolStripMenuItem_Click);
+            // 
+            // verArtículoToolStripMenuItem
+            // 
+            this.verArtículoToolStripMenuItem.Name = "verArtículoToolStripMenuItem";
+            this.verArtículoToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.verArtículoToolStripMenuItem.Text = "Ver Artículo";
+            this.verArtículoToolStripMenuItem.Click += new System.EventHandler(this.verArtículoToolStripMenuItem_Click);
             // 
             // registrarEnvíoToolStripMenuItem
             // 
@@ -578,59 +640,19 @@
             this.verOSToolStripMenuItem.Text = "Ver O.S";
             this.verOSToolStripMenuItem.Click += new System.EventHandler(this.verOSToolStripMenuItem_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox4.BackgroundImage")));
-            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox4.Controls.Add(this.cbEstadoOT);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.cbAtencion);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.cbTecnico);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Location = new System.Drawing.Point(516, 103);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(259, 206);
-            this.groupBox4.TabIndex = 22;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "O.T ";
-            // 
-            // cbEstadoOT
-            // 
-            this.cbEstadoOT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstadoOT.FormattingEnabled = true;
-            this.cbEstadoOT.Items.AddRange(new object[] {
-            "Seleccione",
-            "Pendiente",
-            "Terminado"});
-            this.cbEstadoOT.Location = new System.Drawing.Point(86, 154);
-            this.cbEstadoOT.Name = "cbEstadoOT";
-            this.cbEstadoOT.Size = new System.Drawing.Size(145, 21);
-            this.cbEstadoOT.TabIndex = 23;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 158);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Estado";
-            // 
             // groupBox5
             // 
             this.groupBox5.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox5.BackgroundImage")));
+            this.groupBox5.BackgroundImage = global::Computer_ware.Properties.Resources.cuadro_celeste_con_blanco_1366x768;
             this.groupBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox5.Controls.Add(this.btBuscarFechas);
             this.groupBox5.Controls.Add(this.dtFechaHastaOT);
             this.groupBox5.Controls.Add(this.label11);
             this.groupBox5.Controls.Add(this.dtFechaOT);
             this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Location = new System.Drawing.Point(987, 103);
+            this.groupBox5.Location = new System.Drawing.Point(987, 93);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(355, 206);
+            this.groupBox5.Size = new System.Drawing.Size(355, 236);
             this.groupBox5.TabIndex = 23;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Rango de Fechas O.T";
@@ -716,7 +738,6 @@
             this.Controls.Add(this.btMostrar);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btBuscar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -737,12 +758,13 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaArticulos)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -819,5 +841,7 @@
         private System.Windows.Forms.Button btMostrar;
         private System.Windows.Forms.Button btClean;
         private System.Windows.Forms.ToolStripMenuItem bodegaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verArtículoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox7;
     }
 }

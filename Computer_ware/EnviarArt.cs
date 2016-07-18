@@ -48,6 +48,8 @@ namespace Computer_ware
                             estado = "Enviado"
                         };
                         ent.envio.Add(en);
+                        Articulo a = ent.Articulo.Find(Convert.ToInt32(lbIDArticulo.Text));
+                        a.estado = "Enviado";
                         ent.SaveChanges();
                         this.Close();
                     }else

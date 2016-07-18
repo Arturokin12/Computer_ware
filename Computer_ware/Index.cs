@@ -354,6 +354,9 @@ namespace Computer_ware
                 if (desde <= hasta)
                 {
                     tablaArticulos.DataSource = con.buscarPorFechaArt(desde, hasta);
+                }else
+                {
+                    MessageBox.Show("Fechas mal ingresadas.", "Error al buscar por Fechas");
                 }
             }
             catch (Exception)
@@ -361,6 +364,13 @@ namespace Computer_ware
                 
             }
             
+        }
+
+        private void verArtículoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VerArtículo a = new VerArtículo();
+            a.lbIDArt.Text = id_mouseClick;
+            a.ShowDialog();
         }
     }
 }

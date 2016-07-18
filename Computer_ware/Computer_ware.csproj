@@ -171,6 +171,12 @@
     <Compile Include="Tecnicos.Designer.cs">
       <DependentUpon>Tecnicos.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerArtículo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerArtículo.Designer.cs">
+      <DependentUpon>VerArtículo.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +234,9 @@
     </Compile>
     <EmbeddedResource Include="Tecnicos.resx">
       <DependentUpon>Tecnicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerArtículo.resx">
+      <DependentUpon>VerArtículo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VerCliente.resx">
       <DependentUpon>VerCliente.cs</DependentUpon>

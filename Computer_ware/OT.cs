@@ -113,7 +113,7 @@ namespace Computer_ware
                         ent.SaveChanges();
                         var consulta = from or in ent.Orden_trabajo
                                        join a in ent.Articulo on or.id_articulo equals a.id_articulo
-                                       join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                                       join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                        join at in ent.atencion on or.id_atencion equals at.id_atencion
                                        where or.id_articulo.ToString().Contains(lbidArt.Text)
                                        select new
@@ -160,7 +160,7 @@ namespace Computer_ware
                     ent.SaveChanges();
                     var consulta = from or in ent.Orden_trabajo
                                    join a in ent.Articulo on or.id_articulo equals a.id_articulo
-                                   join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                                   join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                    join at in ent.atencion on or.id_atencion equals at.id_atencion
                                    where or.id_articulo.ToString().Contains(lbidArt.Text)
                                    select new
@@ -220,7 +220,7 @@ namespace Computer_ware
                     ent.SaveChanges();
                     var consulta = from or in ent.Orden_trabajo
                                    join a in ent.Articulo on or.id_articulo equals a.id_articulo
-                                   join t in ent.tecnico on or.id_atencion equals t.id_tecnico
+                                   join t in ent.tecnico on or.id_tecnico equals t.id_tecnico
                                    join at in ent.atencion on or.id_atencion equals at.id_atencion
                                    where or.id_articulo.ToString().Contains(lbidArt.Text)
                                    select new
